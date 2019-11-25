@@ -11,9 +11,9 @@ const NavbarComponent = (props) => {
 
   return (
     <div>
-      <Navbar color="faded" dark>
+      <Navbar color="dark" dark>
         <NavbarBrand href="/" className="mr-auto">Home</NavbarBrand>
-        <NavbarToggler onClick={toggleNavbar} className="mr-2" />
+        <NavbarToggler onClick={toggleNavbar} className="mr-2"/>
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
             <NavItem>
