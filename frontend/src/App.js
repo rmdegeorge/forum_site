@@ -6,13 +6,13 @@ import Home from './pages/Home';
 import Topics from './pages/Topics';
 import Topic from './pages/Topic';
 import Favorites from './pages/Favorites';
-import Navbar from './Components/Navbar';
+import NavbarComponent from './Components/NavbarComponent';
 
 function App(props) {
   return (
     <div>
       <GlobalStyle />
-      <Navbar />
+      <NavbarComponent />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/Topics" component={Topics} />
