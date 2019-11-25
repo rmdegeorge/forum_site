@@ -6,14 +6,13 @@ import Home from './pages/Home';
 import Topics from './pages/Topics';
 import Topic from './pages/Topic';
 import Favorites from './pages/Favorites';
-import Navbar from './Components/Navbar';
-import PostForm from './Components/PostForm'
+import NavbarComponent from './Components/NavbarComponent';
 
 function App(props) {
   return (
     <div>
       <GlobalStyle />
-      <Navbar />
+      <NavbarComponent />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/Topics" component={Topics} />
@@ -21,7 +20,6 @@ function App(props) {
         <Route exact path="/Topic" component={Topic} />
 
       </Switch>
-      <PostForm />
     </div>
   )
 }
