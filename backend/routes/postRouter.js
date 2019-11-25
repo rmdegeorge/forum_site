@@ -8,7 +8,7 @@ postRouter.route('/')
         Post.find((err, posts) =>{
             if(err) return res.status(500).send(err)
             return res.status(200).send(posts)
-        })
+        }).populate('comments')
     })
 
     .post((req, res) => {
@@ -22,14 +22,14 @@ postRouter.route('/')
 postRouter.route('/:_id')
 
     .get((req, res) => {
-        post.findByIdd(req.params._id, (err, post) =>{
+        Post.findById(req.params._id, (err, post) =>{
             if(err) return res.status(500).send(err)
             return res.status(200).send(post)
-        })
+        }).populate('comments')
     })
 
     .put((req, res) =>{
-        post.findOneAndUpdate(
+        Post.findOneAndUpdate(
             {_id: req.params._id},
             req.body,
             {new: true},
@@ -37,11 +37,11 @@ postRouter.route('/:_id')
                 if(err) return res.status(500).send(err)
                 return res.status(200).send(post)
             }
-        )
+        ).populate('comments')
     })
 
     .delete((req, res) =>{
-        post.findOneAndDelete(
+        Post.findOneAndDelete(
             {_id: req.params._id},
             (err, post) =>{
                 if(err) return res.status(500).send(err)
