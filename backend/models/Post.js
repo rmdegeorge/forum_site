@@ -14,7 +14,13 @@ const postSchema = new Schema({
         type: String,
         required: true
     },
-    tags: [String]
+    tags: [String],
+    username: String,
+    created: {
+        type: Date,
+        default: Date.now
+    },
+    votes: Number
 })
 
 module.exports = mongoose.model('Post', postSchema)
