@@ -4,7 +4,7 @@ import {Navbar, NavbarBrand, Nav, NavItem, NavLink, NavbarToggler, Collapse} fro
 
 // const NavbarWrapper = styled.div``;
 
-const Navbar = (props) => {
+const NavbarComponent = (props) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
@@ -32,4 +32,4 @@ const Navbar = (props) => {
   )
 }
 
-export default Navbar;
+export default NavbarComponent;

@@ -10,8 +10,8 @@ const TopicTitle = styled.div``;
 
 function Topic(props) {
   // const populatePosts = props.posts.map((post) => {  //UNCOMMENT WHEN DATA IS AVAILABLE
-    return <Post postInfo={post} />
-  })
+  //   return <Post postInfo={post} />
+  // }
   return (
     <TopicWrapper>
       <TopicTitle>{props.topic}</TopicTitle>
@@ -19,5 +19,4 @@ function Topic(props) {
     </TopicWrapper>
   );
 };
-
 export default withPosts(Topic);
