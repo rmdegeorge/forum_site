@@ -25,6 +25,9 @@ const NavbarComponent = (props) => {
             <NavItem>
               <NavLink href="/Topic">Topic</NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink href="/NewPost">New Post</NavLink>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
