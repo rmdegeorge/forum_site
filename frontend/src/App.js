@@ -7,6 +7,7 @@ import Topics from './pages/Topics';
 import Topic from './pages/Topic';
 import Favorites from './pages/Favorites';
 import Navbar from './Components/Navbar';
+import PostForm from './Components/PostForm'
 
 function App(props) {
   return (
@@ -20,6 +21,7 @@ function App(props) {
         <Route exact path="/Topic" component={Topic} />
 
       </Switch>
+      <PostForm />
     </div>
   )
 }
