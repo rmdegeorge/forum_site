@@ -5,10 +5,29 @@ import Post from '../Components/Post';
 import Comment from '../Components/Comment';
 
 import axios from 'axios';
-const API_HOST = "http://localhost:8080/"; // delete this line once state and axios calls are moved to Context.
+const API_HOST = "http://192.168.1.37:8080/"; // delete this line once state and axios calls are moved to Context.
 
 
-const PostPageWrapper = styled.div``;
+const PostPageWrapper = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto 0 auto;
+`;
+const CommentsWrapper = styled.div`
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0 0 0 auto;
+  position: relative;
+  right: 0;
+
+  > :nth-child(2n) {
+    background-color: grey;
+  }
+`;
 
 
 class PostPage extends React.Component {
@@ -33,7 +52,7 @@ class PostPage extends React.Component {
   }
 
   render() {
-    const {postId} = this.props;
+    // const {postId} = this.props; //uncomment when PostPage is recieving a postID
     const displayComments = this.state.comments.map((comment) => {
         return <Comment key={comment._id} commentInfo={comment} />
     })
@@ -57,7 +76,9 @@ class PostPage extends React.Component {
     return (
       <PostPageWrapper>
         <Post postInfo={postInfo}/>
-        {displayComments}
+        <CommentsWrapper>
+          {displayComments}
+        </CommentsWrapper>
       </PostPageWrapper>
     );
   };
