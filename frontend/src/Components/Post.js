@@ -5,11 +5,20 @@ import {withPosts} from '../providers/PostDataProvider';
 const PostWrapper = styled.div`
   width: 100%;
   border: 1px solid #000000;
+  padding: 10px;
+  margin: 0 0 0 0;
 `;
-const PostTitle = styled.div``;
-const UserName = styled.div``;
-const TimeStamp = styled.div``;
-const PostBody = styled.div``;
+const PostTitle = styled.div`
+  font-size: 20pt;
+`;
+const UNameAndTime = styled.div`
+  display: flex;
+  align-items: flex-end;
+  font-size: 10pt;
+`;
+const PostBody = styled.div`
+  padding: 10px;
+`;
 const CommentButton = styled.button``;
 const PostTags = styled.div``;
 const PostVotes = styled.div``;
@@ -56,8 +65,9 @@ class Post extends React.Component {
     return (
       <PostWrapper>
         <PostTitle>{title}</PostTitle>
-        <UserName>User: {username}</UserName>
-        <TimeStamp>Posted: {date}</TimeStamp>
+        <UNameAndTime>
+          Posted by: {username} on {date}
+        </UNameAndTime>
         <PostBody>{body}</PostBody>
         <PostTags>{tags.join(', ')}</PostTags>
         <PostVotes>{this.state.votes}</PostVotes>
