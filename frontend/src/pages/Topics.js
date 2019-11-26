@@ -1,14 +1,39 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { Component } from 'react';
+import axios from 'axios'
 
-const TopicsWrapper = styled.div``;
+import Card from '../Components/Card'
 
-function Topics(props) {
-  return (
-    <TopicsWrapper>
+class TopicsContainer extends Component {
+    constructor(){
+        super()
 
-    </TopicsWrapper>
-  )
+        this.state = {
+          topics: []
+        }
+    }
+
+    componentDidMount(){
+        axios.get("http://192.168.1.37:8080/topics").then( res => {
+          console.log(res.data)
+          this.setState({topics: res.data})
+          console.log(this.state.topics)
+        })
+    }
+
+
+    render() {
+
+        const mappedTopics = this.state.topics.map(topic => (
+            <Card key={topic._id}
+                  title={topic.name}/>
+        ))
+
+        return (
+            <div>
+                {mappedTopics}
+            </div>
+        );
+    }
 }
 
-export default Topics;
+export default TopicsContainer;
