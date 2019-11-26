@@ -18,7 +18,7 @@ class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      votes: Number
+      votes: this.props.postInfo.votes
     };
   };
   handleVote = (type) => {
@@ -36,17 +36,18 @@ class Post extends React.Component {
   };
 
   render() {
-    const {topic,title,body,username,tags,created,votes} = props.postInfo
+    const {topic,title,body,username,tags,created,votes} = this.props.postInfo
+    const date = new Date(created).toUTCString();
     return (
       <PostWrapper>
         <PostTitle>{title}</PostTitle>
         <UserName>{username}</UserName>
-        <TimeStamp>{created}</TimeStamp>
+        <TimeStamp>{date}</TimeStamp>
         <PostBody>{body}</PostBody>
-        <PostTags>{tags}</PostTags>
-        <PostVotes>{votes}</PostVotes>
-        <VoteBtn type="up" onClick={() => handleVote(up)}>Sweet!</VoteBtn>
-        <VoteBtn type="down" onClick={() => handleVote(down)}>Not Cool</VoteBtn>
+        <PostTags>{tags.join(', ')}</PostTags>
+        <PostVotes>{this.state.votes}</PostVotes>
+        {/* <VoteBtn type="up" onClick={() => this.handleVote("up")}>Sweet!</VoteBtn>
+        <VoteBtn type="down" onClick={() => this.handleVote("down")}>Not Cool</VoteBtn> */}
         <ReplyButton>Reply</ReplyButton>
       </PostWrapper>
     )
