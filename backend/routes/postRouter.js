@@ -2,6 +2,15 @@ const express = require('express')
 const postRouter = express.Router()
 const Post = require('../models/Post')
 
+postRouter.route('/')
+
+    .get((req, res) =>{
+        Post.find((err, posts) =>{
+            if(err) res.status(500).send(err)
+            return res.status(200).send(posts)
+        })
+    })
+
 postRouter.route('/:topicID')
 
     .get((req, res) => {
@@ -20,10 +29,10 @@ postRouter.route('/:topicID')
         })
     })
 
-postRouter.route('/:postID')
+postRouter.route('/:_id')
 
     .get((req, res) => {
-        Post.findById({post: req.params.postID}, (err, post) => {
+        Post.findById(req.params._id, (err, post) => {
             if (err) return res.status(500).send(err)
             return res.status(200).send(post)
         }).populate('comments')

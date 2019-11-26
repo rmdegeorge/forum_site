@@ -12,12 +12,18 @@ const ReplyButton = styled.button``;
 
 
 function Comment(props) {
+  const {username,body,created} = props.commentInfo;
+  const date = new Date(created).toUTCString();
+
   return (
     <CommentWrapper>
-      <Username>{props.username}</Username>
-      <TimeStamp>{props.time}</TimeStamp>
-      <CommentBody>{props.comment}</CommentBody>
+    I'm a comment!
+      <Username>{username}</Username>
+      <TimeStamp>{date}</TimeStamp>
+      <CommentBody>{body}</CommentBody>
       <ReplyButton>Reply</ReplyButton>
     </CommentWrapper>
   )
 }
+
+export default Comment;
