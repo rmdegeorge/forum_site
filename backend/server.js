@@ -4,14 +4,15 @@ const app = express()
 const PORT = 8080
 
 app.use(express.json())
-app.use('/postList', require('./routes/postRouter'))
-app.use('/comment', require('./routes/commentRouter'))
+app.use('/topics', require('./routes/topicRouter'))
+app.use('/posts', require('./routes/postRouter'))
+app.use('/comments', require('./routes/commentRouter'))
 
 mongoose.connect(
-    'mongodb://localhost:27017/postList', 
+    'mongodb://localhost:27017/forum',
     {
-        useNewUrlParser: true, 
-        useUnifiedTopology: true, 
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
         useFindAndModify: false
     })
     .then(() => {
@@ -21,6 +22,6 @@ mongoose.connect(
         console.log(err)
     })
 
-    app.listen(PORT, () => {
-        console.log(`app is listening on port ${PORT}`)
-    })
+app.listen(PORT, () => {
+    console.log(`app is listening on port ${PORT}`)
+})

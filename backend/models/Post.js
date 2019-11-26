@@ -3,7 +3,8 @@ const Schema = mongoose.Schema
 
 const postSchema = new Schema({
     topic: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "Topic",
         required: true
     },
     title: {
