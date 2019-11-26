@@ -7,6 +7,7 @@ import Topics from './pages/Topics';
 import Topic from './pages/Topic';
 import Favorites from './pages/Favorites';
 import NavbarComponent from './Components/NavbarComponent';
+import NewPost from './pages/NewPost';
 
 function App(props) {
   return (
@@ -18,7 +19,7 @@ function App(props) {
         <Route exact path="/Topics" component={Topics} />
         <Route exact path="/Favorites" component={Favorites} />
         <Route exact path="/Topic" component={Topic} />
-
+        <Route exact path="/NewPost" component={NewPost} />
       </Switch>
     </div>
   )

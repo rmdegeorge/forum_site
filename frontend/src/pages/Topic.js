@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import {withPosts} from '../providers/PostDataProvider'
-import Post from '../Components/Post';
+// import Post from '../Components/Post';
 
 const TopicWrapper = styled.div``;
 const TopicTitle = styled.div``;
