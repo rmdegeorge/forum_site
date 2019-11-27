@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {withPosts} from '../providers/PostDataProvider';
+import BackButton from '../Components/BackButton'
+
 
 import Card from '../Components/Card'
 
@@ -9,7 +11,9 @@ class TopicsContainer extends Component {
     this.props.getTopics();
   };
 
+
   render() {
+    console.log(this.props)
     const mappedTopics = this.props.topics.map(topic => (
       <Card key={topic._id}
             topicInfo={topic}/>
@@ -19,6 +23,7 @@ class TopicsContainer extends Component {
 
     return (
       <div>
+        <BackButton goBack = {this.props.history.goBack}/>
         {mappedTopics}
       </div>
     );

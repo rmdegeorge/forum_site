@@ -4,6 +4,7 @@ import {withPosts} from '../providers/PostDataProvider';
 
 import Post from '../Components/Post';
 import Comment from '../Components/Comment';
+import BackButton from '../Components/BackButton'
 
 const PostPageWrapper = styled.div`
   width: 90%;
@@ -42,7 +43,9 @@ class PostPage extends React.Component {
 
     return (
       <PostPageWrapper>
-        the Post will go here when we have Get One post functionality on the backend
+        <BackButton goBack={this.props.history.goBack()}/>
+        {/* <Post postInfo={postInfo}/>
+        the Post will go here when we have Get One post functionality on the backend */}
         {/* <Post postInfo={~~~~~Insert Post info HERE~~~~~~~}/> */}
         <CommentsWrapper>
           {displayComments}
