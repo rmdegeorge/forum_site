@@ -4,6 +4,7 @@ import {withPosts} from '../providers/PostDataProvider';
 
 import Post from '../Components/Post';
 import Comment from '../Components/Comment';
+import BackButton from '../Components/BackButton'
 
 const PostPageWrapper = styled.div`
   width: 90%;
@@ -57,6 +58,7 @@ class PostPage extends React.Component {
 
     return (
       <PostPageWrapper>
+        <BackButton goBack={this.props.history.goBack()}/>
         <Post postInfo={postInfo}/>
         <CommentsWrapper>
           {displayComments}
