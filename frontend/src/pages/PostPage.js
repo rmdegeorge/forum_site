@@ -29,10 +29,8 @@ const CommentsWrapper = styled.div`
 
 
 class PostPage extends React.Component {
-
   componentDidMount() {
-    console.log(this.props.match.params.postId);
-    // NEED to call a function to get one post with the above post ID when that functionality is available from the backend
+    this.props.getOnePost(this.props.match.params.postId)
     this.props.getCommentsForPost(this.props.match.params.postId)
   };
 
@@ -43,10 +41,9 @@ class PostPage extends React.Component {
 
     return (
       <PostPageWrapper>
+        <Post postInfo={this.props.onePost}/>
         <BackButton goBack={this.props.history.goBack()}/>
-        {/* <Post postInfo={postInfo}/>
-        the Post will go here when we have Get One post functionality on the backend */}
-        {/* <Post postInfo={~~~~~Insert Post info HERE~~~~~~~}/> */}
+
         <CommentsWrapper>
           {displayComments}
         </CommentsWrapper>

@@ -11,13 +11,31 @@ class PostDataProvider extends React.Component {
         allPosts: [],
         comments: [],
         posts: [],
-        topics: []
+        topics: [],
+        onePost: {
+          tags: [],   //This is here to prime state for the tags array. if its not there, the .join method will break on render before the data comes back from axios
+        },
       };
   };
-  getPost = (postId) => {
-    this.state.allPost.find((post) => {
-      return post._id === postId
-    })
+  handleVotes = (postId,newVoteCount) => {
+
+    axios.put(`${API_HOST}posts/${postId}`, newVoteCount)
+      .then((res) => {
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  getOnePost = (postId) => {
+    axios.get(`${API_HOST}posts/OnePost/${postId}`)
+      .then((res) => {
+        this.setState({
+          onePost: res.data
+        })
+      })
+      .catch((err) => {
+        console.error(err)
+      });
   };
   getCommentsForPost = (postId) => {
     axios.get(`${API_HOST}comments/${postId}`)
@@ -70,6 +88,8 @@ class PostDataProvider extends React.Component {
         getCommentsForPost: this.getCommentsForPost,
         getPostsForTopic: this.getPostsForTopic,
         getTopics: this.getTopics,
+        getOnePost: this.getOnePost,
+        handleVotes: this.handleVotes,
 
       }}>
         {this.props.children}
