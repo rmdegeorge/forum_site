@@ -33,14 +33,14 @@ commentRouter.route('/:postID')
 commentRouter.route('/:_id')
 
     .get((req, res) => {
-        comment.findById(req.params._id, (err, comment) => {
+        Comment.findById(req.params._id, (err, comment) => {
             if (err) return res.status(500).send(err)
             return res.status(200).send(comment)
         })
     })
 
     .put((req, res) => {
-        comment.findOneAndUpdate(
+        Comment.findOneAndUpdate(
             { _id: req.params._id },
             req.body,
             { new: true },
@@ -52,7 +52,7 @@ commentRouter.route('/:_id')
     })
 
     .delete((req, res) => {
-        comment.findOneAndDelete(
+        Comment.findOneAndDelete(
             { _id: req.params._id },
             (err, comment) => {
                 if (err) return res.status(500).send(err)
