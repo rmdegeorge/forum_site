@@ -29,15 +29,17 @@ postRouter.route('/:topicID')
         })
     })
 
+// Get One Post
+postRouter.route('/OnePost/:_id')
+  .get((req, res) => {
+    Post.findById(req.params._id, (err, post) => {
+      if (err) return res.status(500).send(err)
+      return res.status(200).send(post)
+    }).populate('comments')
+  })
+
 postRouter.route('/:_id')
-
-    .get((req, res) => {
-        Post.findById(req.params._id, (err, post) => {
-            if (err) return res.status(500).send(err)
-            return res.status(200).send(post)
-        }).populate('comments')
-    })
-
+  
     .put((req, res) => {
         Post.findOneAndUpdate(
             { _id: req.params._id },
