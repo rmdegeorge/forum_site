@@ -18,10 +18,9 @@ class PostDataProvider extends React.Component {
       };
   };
   handleVotes = (postId,newVoteCount) => {
+
     axios.put(`${API_HOST}posts/${postId}`, newVoteCount)
       .then((res) => {
-        // console.log(res.data);
-        // console.log(`newVoteCount ${newVoteCount.votes}`);
       })
       .catch((err) => {
         console.error(err);

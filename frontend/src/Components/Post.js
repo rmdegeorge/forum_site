@@ -32,7 +32,7 @@ class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      votes: 0
+      votes: Number
     };
   };
   componentDidMount() {
@@ -40,32 +40,32 @@ class Post extends React.Component {
       votes: this.props.postInfo.votes
     });
   }
-  handleVote = (type) => {
+  handleVote = (type,currentVotes,postId) => {
+    let newVoteCount;
     if (type === "up") {
-      console.log(`sweet`);
-      this.setState((prev) => {
+      this.setState(() => {
         return {
-          votes: prev.votes + 1
+          votes: currentVotes + 1
         }
       });
-      console.log(this.state.votes);
+      newVoteCount = {votes: currentVotes + 1};
     } else {
-      console.log(`not cool`);
       this.setState((prev) => {
         return {
-          votes: prev.votes - 1
+          votes: currentVotes - 1
         }
       });
-      console.log(this.state.votes);
+      newVoteCount = {votes: currentVotes - 1}
     };
-    // This method may need to be moved to context so that it
-    // can update the vote count in the DB
+
+    this.props.handleVotes(postId, newVoteCount);
   };
 
   render() {
-    console.log(this.props)
     const {_id,topic,title,body,username,tags,created,votes} = this.props.postInfo
     const date = new Date(created).toUTCString();
+
+    console.log(`Current Votes on render: ${this.state.votes}`);
 
     return (
       <PostWrapper>
@@ -80,8 +80,8 @@ class Post extends React.Component {
         <PostBody>{body}</PostBody>
         <PostTags>{tags.join(', ')}</PostTags>
         <PostVotes>{this.state.votes}</PostVotes>
-        <VoteBtn type="up" onClick={() => this.handleVote("up")}>Sweet!</VoteBtn>
-        <VoteBtn type="down" onClick={() => this.handleVote("down")}>Not Cool</VoteBtn>
+        <VoteBtn type="up" onClick={() => this.handleVote("up",this.state.votes,_id)}>Sweet!</VoteBtn>
+        <VoteBtn type="down" onClick={() => this.handleVote("down",this.state.votes,_id)}>Not Cool</VoteBtn>
         <CommentButton>Comment</CommentButton>
       </PostWrapper>
     )
