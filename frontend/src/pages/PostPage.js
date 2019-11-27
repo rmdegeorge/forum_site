@@ -30,34 +30,20 @@ const CommentsWrapper = styled.div`
 class PostPage extends React.Component {
 
   componentDidMount() {
-    this.props.getCommentsForPost("5ddd5f0bacfb744940f2cc15")
+    console.log(this.props.match.params.postId);
+    // NEED to call a function to get one post with the above post ID when that functionality is available from the backend
+    this.props.getCommentsForPost(this.props.match.params.postId)
   };
 
   render() {
-    // const {postId} = this.props; //uncomment when PostPage is recieving a postID
     const displayComments = this.props.comments.map((comment) => {
         return <Comment key={comment._id} commentInfo={comment} />
     })
-    const postInfo =
-    {
-      "title": "Electric F-150",
-      "tags": [
-          "all aboard",
-          "thank god for low rolling resistance",
-          "physics makes me look good"
-      ],
-      "_id": "5ddd5f0bacfb744940f2cc15",
-      "topic": "5ddd5d44acfb744940f2cc11",
-      "body": "Apparently it pulls trains",
-      "username": "robdegeorge",
-      "votes": 0,
-      "created": "2019-11-26T17:21:15.760Z",
-      "__v": 0
-    }
 
     return (
       <PostPageWrapper>
-        <Post postInfo={postInfo}/>
+        the Post will go here when we have Get One post functionality on the backend
+        {/* <Post postInfo={~~~~~Insert Post info HERE~~~~~~~}/> */}
         <CommentsWrapper>
           {displayComments}
         </CommentsWrapper>

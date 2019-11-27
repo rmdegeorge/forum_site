@@ -21,7 +21,7 @@ function App(props) {
         <Route path="/Favorites" component={Favorites} />
         <Route exact path="/Topics/:topicId" component={Topic} />
         <Route path="/NewPost" component={NewPost} />
-        <Route  path="/Topics/:topicId/:postId" component={PostPage} />
+        <Route  path="/Posts/:postId" component={PostPage} />
       </Switch>
     </div>
   )

@@ -14,8 +14,9 @@ class Topic extends Component {
   };
 
   render(){
+
     const populatePosts = this.props.posts.map((post) => {
-      return <Post postInfo={post} />
+      return <Post key={post._id} postInfo={post} />
     })
     return (
       <TopicWrapper>

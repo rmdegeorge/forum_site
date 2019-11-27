@@ -14,6 +14,9 @@ class TopicsContainer extends Component {
       <Card key={topic._id}
             topicInfo={topic}/>
     ));
+
+    console.log(this.props);
+
     return (
       <div>
         {mappedTopics}
