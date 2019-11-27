@@ -17,7 +17,6 @@ const NavLink = styled(Link)`
 
 function Card(props){
   const {name,_id} = props.topicInfo;
-  console.log(props.topicInfo);
     return (
       <CardWrapper>
         <NavLink to={`/Topics/${_id}`}>
