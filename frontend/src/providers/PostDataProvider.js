@@ -37,8 +37,8 @@ class PostDataProvider extends React.Component {
         console.error(err)
       });
   };
-  getPostsForTopic = () => {        // we'll need to adjust this so it only pulls post for a single topic
-    axios.get(`${API_HOST}posts/`)
+  getPostsForTopic = (id) => {        // we'll need to adjust this so it only pulls post for a single topic
+    axios.get(`${API_HOST}posts/${id}`)
       .then(res => {
         this.setState({
           posts: res.data

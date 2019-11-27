@@ -10,11 +10,10 @@ const TopicTitle = styled.div``;
 class Topic extends Component {
 
   componentDidMount(){
-    this.props.getPostsForTopic();
+    this.props.getPostsForTopic(this.props.match.params.topicId);
   };
 
   render(){
-
     const populatePosts = this.props.posts.map((post) => {
       return <Post postInfo={post} />
     })

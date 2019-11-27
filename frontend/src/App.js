@@ -18,10 +18,10 @@ function App(props) {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/Topics" component={Topics} />
-        <Route exact path="/Favorites" component={Favorites} />
-        <Route exact path="/Topic" component={Topic} />
-        <Route exact path="/NewPost" component={NewPost} />
-        <Route exact path="/Post" component={PostPage} />
+        <Route path="/Favorites" component={Favorites} />
+        <Route exact path="/Topics/:topicId" component={Topic} />
+        <Route path="/NewPost" component={NewPost} />
+        <Route  path="/Topics/:topicId/:postId" component={PostPage} />
       </Switch>
     </div>
   )
