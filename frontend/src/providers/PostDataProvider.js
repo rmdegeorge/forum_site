@@ -8,16 +8,29 @@ class PostDataProvider extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
-        topics: [],
-        posts: [],
-        comments: [],
+        allPosts: [],
 
-      }
+      };
   };
+
+  getRandomPosts = () => {
+    axios.get(`${API_HOST}posts/`)
+      .then((res) => {
+        this.setState({
+          allPosts: res.data
+        });
+        console.log(this.state.allPosts);
+      })
+      .catch((err) => {
+        console.error(err)
+      });
+  };
+
   render() {
     return (
       <Provider value={{
         ...this.state,
+        getRandomPosts: this.getRandomPosts,
 
       }}>
         {this.props.children}
