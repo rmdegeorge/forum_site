@@ -8,7 +8,7 @@ const NavbarComponent = (props) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
-
+  
   return (
     <div>
       <Navbar color="dark" dark>
