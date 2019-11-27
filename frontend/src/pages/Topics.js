@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {withPosts} from '../providers/PostDataProvider';
 import BackButton from '../Components/BackButton'
 
-
 import Card from '../Components/Card'
 
 class TopicsContainer extends Component {
