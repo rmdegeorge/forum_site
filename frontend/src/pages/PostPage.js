@@ -5,10 +5,6 @@ import {withPosts} from '../providers/PostDataProvider';
 import Post from '../Components/Post';
 import Comment from '../Components/Comment';
 
-import axios from 'axios';
-const API_HOST = process.env.REACT_APP_API_HOST; // delete this line once state and axios calls are moved to Context.
-
-
 const PostPageWrapper = styled.div`
   width: 90%;
   display: flex;
