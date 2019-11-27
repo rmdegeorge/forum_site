@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Post from '../Components/Post';
 
 import axios from 'axios';
-const API_HOST = "http://192.168.1.37:8080/"; // delete this line once state and axios calls are moved to Context.
+const API_HOST = process.env.REACT_APP_API_HOST; // delete this line once state and axios calls are moved to Context.
 
 const HomeWrapper = styled.div`
   display: flex;
@@ -38,10 +38,11 @@ class Home extends React.Component {
         console.log(this.state.allPosts);
       })
       .catch((err) => {
-        console.err(err)
+        console.error(err)
       });
   };
   render() {
+    console.log(API_HOST);
     const sortedPosts = this.state.allPosts.sort((a, b) => (a.votes > b.votes) ? -1 : 1); // sort all posts by number of votes
     const displayPopularPosts = sortedPosts.slice(0,9).map((post) =>
       <Post key={post._id} postInfo={post} />

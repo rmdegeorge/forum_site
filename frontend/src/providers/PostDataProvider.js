@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+const API_HOST = process.env.REACT_APP_API_HOST;
+
 const {Provider, Consumer} = React.createContext();
 
 class PostDataProvider extends React.Component {
