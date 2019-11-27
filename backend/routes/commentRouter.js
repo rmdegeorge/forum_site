@@ -30,14 +30,16 @@ commentRouter.route('/:postID')
         })
     })
 
-commentRouter.route('/:_id')
-
-    .get((req, res) => {
-        Comment.findById(req.params._id, (err, comment) => {
-            if (err) return res.status(500).send(err)
-            return res.status(200).send(comment)
-        })
+// Get one comment
+commentRouter.route('/OneComment/:_id')
+  .get((req, res) => {
+    Comment.findById(req.params._id, (err, comment) => {
+      if (err) return res.status(500).send(err)
+      return res.status(200).send(comment)
     })
+  })
+
+commentRouter.route('/:_id')
 
     .put((req, res) => {
         Comment.findOneAndUpdate(
