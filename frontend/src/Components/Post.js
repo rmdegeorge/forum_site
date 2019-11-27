@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {withPosts} from '../providers/PostDataProvider';
+import {Link} from 'react-router-dom';
 
 const PostWrapper = styled.div`
   width: 100%;
@@ -23,6 +24,9 @@ const CommentButton = styled.button``;
 const PostTags = styled.div``;
 const PostVotes = styled.div``;
 const VoteBtn = styled.button``;
+const NavLink = styled(Link)`
+  color: inherit;
+`;
 
 class Post extends React.Component {
   constructor(props) {
@@ -32,7 +36,6 @@ class Post extends React.Component {
     };
   };
   componentDidMount() {
-    console.log(this.props.postInfo.votes)
     this.setState({
       votes: this.props.postInfo.votes
     });
@@ -60,11 +63,17 @@ class Post extends React.Component {
   };
 
   render() {
-    const {topic,title,body,username,tags,created,votes} = this.props.postInfo
+    console.log(this.props)
+    const {_id,topic,title,body,username,tags,created,votes} = this.props.postInfo
     const date = new Date(created).toUTCString();
+
     return (
       <PostWrapper>
-        <PostTitle>{title}</PostTitle>
+        <PostTitle>
+          <NavLink to={`/Posts/${_id}`}>
+            {title}
+          </NavLink>
+        </PostTitle>
         <UNameAndTime>
           Posted by: {username} on {date}
         </UNameAndTime>
