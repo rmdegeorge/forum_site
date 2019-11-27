@@ -62,10 +62,8 @@ class Post extends React.Component {
   };
 
   render() {
-    const {_id,topic,title,body,username,tags,created,votes} = this.props.postInfo
+    const {_id,title,body,username,tags,created} = this.props.postInfo
     const date = new Date(created).toUTCString();
-
-    console.log(`Current Votes on render: ${this.state.votes}`);
 
     return (
       <PostWrapper>
