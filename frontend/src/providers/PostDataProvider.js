@@ -10,10 +10,21 @@ class PostDataProvider extends React.Component {
       this.state = {
         allPosts: [],
         comments: [],
-
+        posts: [],
+        topics: []
       };
   };
-
+  getCommentsForPost = (postId) => {
+    axios.get(`${API_HOST}comments/${postId}`)
+      .then((res) => {
+        this.setState({
+          comments: res.data
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
   getRandomPosts = () => {
     axios.get(`${API_HOST}posts/`)
       .then((res) => {
@@ -26,16 +37,24 @@ class PostDataProvider extends React.Component {
         console.error(err)
       });
   };
-
-  getCommentsForPost = (postId) => {
-    axios.get(`${API_HOST}comments/${postId}`)
-      .then((res) => {
+  getPostsForTopic = () => {        // we'll need to adjust this so it only pulls post for a single topic
+    axios.get(`${API_HOST}posts/`)
+      .then(res => {
         this.setState({
-          comments: res.data
+          posts: res.data
         });
       })
       .catch((err) => {
-        console.error(err);
+        console.error(err)
+      });
+  };
+  getTopics = () => {
+    axios.get(`${API_HOST}topics`)
+      .then( res => {
+        this.setState({topics: res.data})
+      })
+      .catch((err) => {
+        console.error(err)
       });
   };
 
@@ -45,6 +64,8 @@ class PostDataProvider extends React.Component {
         ...this.state,
         getRandomPosts: this.getRandomPosts,
         getCommentsForPost: this.getCommentsForPost,
+        getPostsForTopic: this.getPostsForTopic,
+        getTopics: this.getTopics,
 
       }}>
         {this.props.children}
