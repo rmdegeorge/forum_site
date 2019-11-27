@@ -21,7 +21,7 @@ class Topic extends Component {
     })
     return (
       <TopicWrapper>
-        <BackButton goBack={this.props.history.goBack()}/>
+        <BackButton goBack={this.props.history.goBack}/>
         <TopicTitle>{this.topic}</TopicTitle>
         {populatePosts}
       </TopicWrapper>
