@@ -9,6 +9,7 @@ class PostDataProvider extends React.Component {
     super(props);
       this.state = {
         allPosts: [],
+        comments: [],
 
       };
   };
@@ -26,11 +27,24 @@ class PostDataProvider extends React.Component {
       });
   };
 
+  getCommentsForPost = (postId) => {
+    axios.get(`${API_HOST}comments/${postId}`)
+      .then((res) => {
+        this.setState({
+          comments: res.data
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   render() {
     return (
       <Provider value={{
         ...this.state,
         getRandomPosts: this.getRandomPosts,
+        getCommentsForPost: this.getCommentsForPost,
 
       }}>
         {this.props.children}
