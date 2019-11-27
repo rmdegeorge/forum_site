@@ -1,39 +1,25 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import {withPosts} from '../providers/PostDataProvider';
 
 import Card from '../Components/Card'
 
 class TopicsContainer extends Component {
-    constructor(){
-        super()
 
-        this.state = {
-          topics: []
-        }
-    }
+  componentDidMount(){
+    this.props.getTopics();
+  };
 
-    componentDidMount(){
-        axios.get("http://192.168.1.37:8080/topics").then( res => {
-          console.log(res.data)
-          this.setState({topics: res.data})
-          console.log(this.state.topics)
-        })
-    }
+  render() {
+    const mappedTopics = this.props.topics.map(topic => (
+      <Card key={topic._id}
+            title={topic.name}/>
+    ));
+    return (
+      <div>
+        {mappedTopics}
+      </div>
+    );
+  };
+};
 
-
-    render() {
-
-        const mappedTopics = this.state.topics.map(topic => (
-            <Card key={topic._id}
-                  title={topic.name}/>
-        ))
-
-        return (
-            <div>
-                {mappedTopics}
-            </div>
-        );
-    }
-}
-
-export default TopicsContainer;
+export default withPosts(TopicsContainer);

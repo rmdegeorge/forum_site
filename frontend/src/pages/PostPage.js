@@ -1,12 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import {withPosts} from '../providers/PostDataProvider';
 
 import Post from '../Components/Post';
 import Comment from '../Components/Comment';
-
-import axios from 'axios';
-const API_HOST = "http://192.168.1.37:8080/"; // delete this line once state and axios calls are moved to Context.
-
 
 const PostPageWrapper = styled.div`
   width: 90%;
@@ -31,29 +28,14 @@ const CommentsWrapper = styled.div`
 
 
 class PostPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      comments: []
-    }
-  }
+
   componentDidMount() {
-    this.getCommentsForPost("5ddd5f0bacfb744940f2cc15")
-  }
-  getCommentsForPost = (postId) => {
-    axios.get(`${API_HOST}comments/${postId}`).then((res) => {
-      this.setState({
-        comments: res.data
-      })
-      console.log(res.data)
-    }).catch((err) => {
-      console.error(err);
-    })
-  }
+    this.props.getCommentsForPost("5ddd5f0bacfb744940f2cc15")
+  };
 
   render() {
     // const {postId} = this.props; //uncomment when PostPage is recieving a postID
-    const displayComments = this.state.comments.map((comment) => {
+    const displayComments = this.props.comments.map((comment) => {
         return <Comment key={comment._id} commentInfo={comment} />
     })
     const postInfo =
@@ -84,4 +66,4 @@ class PostPage extends React.Component {
   };
 };
 
-export default PostPage;
+export default withPosts(PostPage);
