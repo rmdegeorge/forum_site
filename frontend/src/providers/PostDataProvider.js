@@ -14,6 +14,11 @@ class PostDataProvider extends React.Component {
         topics: []
       };
   };
+  getPost = (postId) => {
+    this.state.allPost.find((post) => {
+      return post._id === postId
+    })
+  };
   getCommentsForPost = (postId) => {
     axios.get(`${API_HOST}comments/${postId}`)
       .then((res) => {
@@ -31,14 +36,13 @@ class PostDataProvider extends React.Component {
         this.setState({
           allPosts: res.data
         });
-        console.log(this.state.allPosts);
       })
       .catch((err) => {
         console.error(err)
       });
   };
-  getPostsForTopic = () => {        // we'll need to adjust this so it only pulls post for a single topic
-    axios.get(`${API_HOST}posts/`)
+  getPostsForTopic = (id) => {        // we'll need to adjust this so it only pulls post for a single topic
+    axios.get(`${API_HOST}posts/${id}`)
       .then(res => {
         this.setState({
           posts: res.data
