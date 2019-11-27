@@ -8,6 +8,7 @@ import Topic from './pages/Topic';
 import Favorites from './pages/Favorites';
 import NavbarComponent from './Components/NavbarComponent';
 import NewPost from './pages/NewPost';
+import PostPage from './pages/PostPage';
 
 function App(props) {
   return (
@@ -20,6 +21,7 @@ function App(props) {
         <Route exact path="/Favorites" component={Favorites} />
         <Route exact path="/Topic" component={Topic} />
         <Route exact path="/NewPost" component={NewPost} />
+        <Route exact path="/Post" component={PostPage} />
       </Switch>
     </div>
   )

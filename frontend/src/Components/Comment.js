@@ -4,20 +4,33 @@ import styled from 'styled-components';
 const CommentWrapper = styled.div`
   width: 100%;
   border: 1px solid #000000;
+  padding: 10px;
+  margin: 10px 0 0 0;
 `;
-const Username = styled.div``;
-const TimeStamp = styled.div``;
-const CommentBody = styled.div``;
+const UNameAndTime = styled.div`
+  display: flex;
+  align-items: flex-end;
+  font-size: 10pt;
+`;
+const CommentBody = styled.div`
+  padding: 10px;
+`;
 const ReplyButton = styled.button``;
 
 
 function Comment(props) {
+  const {username,body,created} = props.commentInfo;
+  const date = new Date(created).toUTCString();
+
   return (
     <CommentWrapper>
-      <Username>{props.username}</Username>
-      <TimeStamp>{props.time}</TimeStamp>
-      <CommentBody>{props.comment}</CommentBody>
+      <UNameAndTime>
+        Posted by: {username} on {date}
+      </UNameAndTime>
+      <CommentBody>{body}</CommentBody>
       <ReplyButton>Reply</ReplyButton>
     </CommentWrapper>
   )
 }
+
+export default Comment;

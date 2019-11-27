@@ -1,14 +1,25 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { Component } from 'react';
+import {withPosts} from '../providers/PostDataProvider';
 
-const TopicsWrapper = styled.div``;
+import Card from '../Components/Card'
 
-function Topics(props) {
-  return (
-    <TopicsWrapper>
+class TopicsContainer extends Component {
 
-    </TopicsWrapper>
-  )
-}
+  componentDidMount(){
+    this.props.getTopics();
+  };
 
-export default Topics;
+  render() {
+    const mappedTopics = this.props.topics.map(topic => (
+      <Card key={topic._id}
+            title={topic.name}/>
+    ));
+    return (
+      <div>
+        {mappedTopics}
+      </div>
+    );
+  };
+};
+
+export default withPosts(TopicsContainer);
