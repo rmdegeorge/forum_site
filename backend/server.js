@@ -5,7 +5,7 @@ const PORT = 8080
 
 app.use(express.json())
 app.use('/topics', require('./routes/topicRouter'))
-app.use('/posts', require('./routes/postRouter'))
+app.use('/Posts', require('./routes/postRouter'))
 app.use('/comments', require('./routes/commentRouter'))
 
 mongoose.connect(

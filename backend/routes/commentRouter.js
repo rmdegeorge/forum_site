@@ -2,6 +2,16 @@ const express = require('express')
 const commentRouter = express.Router()
 const Comment = require('../models/Comment')
 
+
+commentRouter.route('/')
+
+    .get((req, res) =>{
+        Comment.find((err, comments) =>{
+            if (err) res.status(500).send(err)
+            return res.status(200).send(comments)
+        })
+    })
+
 commentRouter.route('/:postID')
 
     .get((req, res) => {
