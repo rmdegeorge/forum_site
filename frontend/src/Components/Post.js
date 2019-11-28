@@ -21,7 +21,17 @@ const PostBody = styled.div`
   padding: 10px;
 `;
 const CommentButton = styled.button``;
-const PostTags = styled.div``;
+const PostTags = styled.div`
+  display: inline-flex;
+`;
+const Tag = styled.div`
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 10px;
+  padding: 0 5px 0 5px;
+  margin: 0 1px 0 0;
+`;
 const PostVotes = styled.div``;
 const VoteBtn = styled.button``;
 const NavLink = styled(Link)`
@@ -64,6 +74,7 @@ class Post extends React.Component {
   render() {
     const {_id,title,body,username,tags,created} = this.props.postInfo
     const date = new Date(created).toUTCString();
+    const displayTags = tags.map((tag) => <Tag>{tag}</Tag>);
 
     return (
       <PostWrapper>
@@ -76,7 +87,9 @@ class Post extends React.Component {
           Posted by: {username} on {date}
         </UNameAndTime>
         <PostBody>{body}</PostBody>
-        <PostTags>{tags.join(', ')}</PostTags>
+        <PostTags>
+          {displayTags}
+        </PostTags>
         <PostVotes>{this.state.votes}</PostVotes>
         <VoteBtn type="up" onClick={() => this.handleVote("up",this.state.votes,_id)}>Sweet!</VoteBtn>
         <VoteBtn type="down" onClick={() => this.handleVote("down",this.state.votes,_id)}>Not Cool</VoteBtn>
