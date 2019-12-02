@@ -1,21 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import {withPosts} from '../providers/PostDataProvider';
-import {Link} from 'react-router-dom';
-/*
-*
-* Display on Popular posts display
-****
-*
-* Display on Topic Page
-****
-*
-* Display on PostPage
-**** no link for title on PostPage
-*
-* Display on Favorites Page
-*
-*/
+import {Link, withRouter} from 'react-router-dom';
+import axios from 'axios';
+const API_HOST = process.env.REACT_APP_API_HOST;
+
+
 const PostWrapper = styled.div`
   width: 100%;
   border: 1px solid #000000;
@@ -31,7 +21,6 @@ const UNameAndTime = styled.div`
   font-size: 10pt;
   > span {
     margin-left: 2pt;
-    margin-right: 2pt;
   }
 `;
 const PostBody = styled.div`
@@ -61,22 +50,50 @@ class Post extends React.Component {
     this.state = {
       votes: Number,
       topic: String,
+      onePost: {
+        tags: [],   //This is here to prime state for the tags array. if its not there, the .join method will break on render before the data comes back from axios
+      },
 
     };
   };
   componentDidMount() {
-    if (this.props.type === "popular" || this.props.type === "postPage") {  // get the topic name if
-      this.props.getTopicOfPost(this.props.postInfo.topic)
+    if (this.props.type === "postPage") {
+      axios.get(`${API_HOST}posts/OnePost/${this.props.postId}`)
+        .then((res) => {
+          try {
+            this.setState({
+              onePost: res.data,
+              votes: res.data.votes
+            });
+          } catch(error) {
+            console.error(error.message);
+          }
+          finally {
+            this.getTopic(this.state.onePost.topic)
+          }
+        });
+    } else {
+      this.setState({
+        onePost: this.props.postInfo,
+        votes: this.props.postInfo.votes
+      })
+      this.getTopic(this.props.postInfo.topic)
+    };
+  };
+
+  getTopic = (topicId) => {
+    if (this.props.type === "popular" || "postPage") {  // get the topic name
+      this.props.getTopicOfPost(topicId)
         .then((res) => {
           this.setState({
             topic: res.data.name
           })
         })
-    }
-    this.setState({
-      votes: this.props.postInfo.votes
-    });
-  }
+        .catch((err) => {
+          console.error(err);
+        });
+    };
+  };
   handleVote = (type,currentVotes,postId) => {
     let newVoteCount;
     if (type === "up") {
@@ -99,9 +116,10 @@ class Post extends React.Component {
   };
 
   render() {
-    const {_id,title,body,username,tags,created,topic} = this.props.postInfo
+
+    const {_id,title,body,username,tags,created,topic} = this.state.onePost
     const date = new Date(created).toUTCString();
-    const displayTags = tags.map((tag) => <Tag>{tag}</Tag>);
+    const displayTags = tags.map((tag,i) => <Tag key={tag + i}>{tag}</Tag>);
 
     return (
       <PostWrapper>
@@ -128,7 +146,7 @@ class Post extends React.Component {
             :
             null
           }
-          on {date}
+          <span>on {date}</span>
         </UNameAndTime>
         <PostBody>{body}</PostBody>
         <PostTags>{displayTags}</PostTags>
@@ -137,8 +155,8 @@ class Post extends React.Component {
         <VoteBtn type="down" onClick={() => this.handleVote("down",this.state.votes,_id)}>Not Cool</VoteBtn>
         <CommentButton>Comment</CommentButton>
       </PostWrapper>
-    )
-  }
-}
+    );
+  };
+};
 
-export default withPosts(Post);
+export default withRouter(withPosts(Post));
