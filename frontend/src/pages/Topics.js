@@ -12,7 +12,6 @@ class TopicsContainer extends Component {
 
 
   render() {
-    console.log(this.props)
     const mappedTopics = this.props.topics.map(topic => (
       <Card key={topic._id}
             topicInfo={topic}/>
