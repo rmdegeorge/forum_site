@@ -22,7 +22,11 @@ class Topic extends Component {
     return (
       <TopicWrapper>
         <BackButton goBack={this.props.history.goBack}/>
-        <TopicTitle>{this.topic}</TopicTitle>
+
+        <TopicTitle>
+          *****Need to make this Display Topic Name here... Not sure why it's not already working....******
+          {this.topic}
+        </TopicTitle>
         {populatePosts}
       </TopicWrapper>
     );
