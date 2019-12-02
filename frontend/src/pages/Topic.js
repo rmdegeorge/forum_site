@@ -22,7 +22,7 @@ class Topic extends Component {
       .then(res => {
         this.setState({
           topic: res.data.name
-        })
+        });
       })
       .catch(err => {
         console.log(err);
@@ -34,11 +34,10 @@ class Topic extends Component {
     const populatePosts = this.props.posts.map((post) => {
       return <Post key={post._id} postInfo={post} />
     });
-    console.log(`state`)
-    console.log(this.state.topic);
+
     return (
       <TopicWrapper>
-        <BackButton goBack={this.props.history.goBack}/>
+        <BackButton goBack={this.props.history.goBack} />
         <TopicTitle>
           {this.state.topic}
         </TopicTitle>
