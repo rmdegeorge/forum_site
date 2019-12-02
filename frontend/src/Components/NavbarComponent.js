@@ -28,6 +28,11 @@ const NavbarComponent = (props) => {
             <NavItem>
               <NavLink href="/NewPost">New Post</NavLink>
             </NavItem>
+            <NavItem>
+              <form>
+                <input type="text" placeholder="search"/>
+              </form>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>

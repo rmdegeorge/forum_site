@@ -42,7 +42,7 @@ class PostPage extends React.Component {
     return (
       <PostPageWrapper>
         <Post postInfo={this.props.onePost}/>
-        <BackButton goBack={this.props.history.goBack()}/>
+        <BackButton goBack={this.props.history.goBack}/>
 
         <CommentsWrapper>
           {displayComments}
