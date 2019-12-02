@@ -79,6 +79,10 @@ class PostDataProvider extends React.Component {
         console.error(err)
       });
   };
+  getTopicOfPost = (topicId) => {
+    return axios.get(`${API_HOST}topics/${topicId}`)
+
+  }
 
   render() {
     return (
@@ -90,6 +94,7 @@ class PostDataProvider extends React.Component {
         getTopics: this.getTopics,
         getOnePost: this.getOnePost,
         handleVotes: this.handleVotes,
+        getTopicOfPost: this.getTopicOfPost,
 
       }}>
         {this.props.children}
