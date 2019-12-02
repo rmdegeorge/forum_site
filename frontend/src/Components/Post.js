@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import {withPosts} from '../providers/PostDataProvider';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
+import axios from 'axios';
+const API_HOST = process.env.REACT_APP_API_HOST;
+
 
 const PostWrapper = styled.div`
   width: 100%;
@@ -16,12 +19,25 @@ const UNameAndTime = styled.div`
   display: flex;
   align-items: flex-end;
   font-size: 10pt;
+  > span {
+    margin-left: 2pt;
+  }
 `;
 const PostBody = styled.div`
   padding: 10px;
 `;
 const CommentButton = styled.button``;
-const PostTags = styled.div``;
+const PostTags = styled.div`
+  display: inline-flex;
+`;
+const Tag = styled.div`
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 10px;
+  padding: 0 5px 0 5px;
+  margin: 0 1px 0 0;
+`;
 const PostVotes = styled.div``;
 const VoteBtn = styled.button``;
 const NavLink = styled(Link)`
@@ -32,14 +48,52 @@ class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      votes: Number
+      votes: Number,
+      topic: String,
+      onePost: {
+        tags: [],   //This is here to prime state for the tags array. if its not there, the .join method will break on render before the data comes back from axios
+      },
+
     };
   };
   componentDidMount() {
-    this.setState({
-      votes: this.props.postInfo.votes
-    });
-  }
+    if (this.props.type === "postPage") {
+      axios.get(`${API_HOST}posts/OnePost/${this.props.postId}`)
+        .then((res) => {
+          try {
+            this.setState({
+              onePost: res.data,
+              votes: res.data.votes
+            });
+          } catch(error) {
+            console.error(error.message);
+          }
+          finally {
+            this.getTopic(this.state.onePost.topic)
+          }
+        });
+    } else {
+      this.setState({
+        onePost: this.props.postInfo,
+        votes: this.props.postInfo.votes
+      })
+      this.getTopic(this.props.postInfo.topic)
+    };
+  };
+
+  getTopic = (topicId) => {
+    if (this.props.type === "popular" || "postPage") {  // get the topic name
+      this.props.getTopicOfPost(topicId)
+        .then((res) => {
+          this.setState({
+            topic: res.data.name
+          })
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    };
+  };
   handleVote = (type,currentVotes,postId) => {
     let newVoteCount;
     if (type === "up") {
@@ -62,28 +116,47 @@ class Post extends React.Component {
   };
 
   render() {
-    const {_id,title,body,username,tags,created} = this.props.postInfo
+
+    const {_id,title,body,username,tags,created,topic} = this.state.onePost
     const date = new Date(created).toUTCString();
+    const displayTags = tags.map((tag,i) => <Tag key={tag + i}>{tag}</Tag>);
 
     return (
       <PostWrapper>
         <PostTitle>
-          <NavLink to={`/Posts/${_id}`}>
-            {title}
-          </NavLink>
+          {
+            this.props.type === "postPage"
+            ?
+            title
+            :
+            <NavLink to={`/Posts/${_id}`}>
+              {title}
+            </NavLink>
+          }
         </PostTitle>
         <UNameAndTime>
-          Posted by: {username} on {date}
+          Posted by: {username}
+          {
+            this.props.type === "popular" || this.props.type === "postPage"
+            ?
+            <span>to <NavLink to={`/Topics/${topic}`}>
+                      {this.state.topic}
+                    </NavLink>
+            </span>
+            :
+            null
+          }
+          <span>on {date}</span>
         </UNameAndTime>
         <PostBody>{body}</PostBody>
-        <PostTags>{tags.join(', ')}</PostTags>
+        <PostTags>{displayTags}</PostTags>
         <PostVotes>{this.state.votes}</PostVotes>
         <VoteBtn type="up" onClick={() => this.handleVote("up",this.state.votes,_id)}>Sweet!</VoteBtn>
         <VoteBtn type="down" onClick={() => this.handleVote("down",this.state.votes,_id)}>Not Cool</VoteBtn>
         <CommentButton>Comment</CommentButton>
       </PostWrapper>
-    )
-  }
-}
+    );
+  };
+};
 
-export default withPosts(Post);
+export default withRouter(withPosts(Post));

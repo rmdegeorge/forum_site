@@ -27,29 +27,26 @@ const CommentsWrapper = styled.div`
   }
 `;
 
-
 class PostPage extends React.Component {
   componentDidMount() {
-    this.props.getOnePost(this.props.match.params.postId)
-    this.props.getCommentsForPost(this.props.match.params.postId)
+    this.props.getCommentsForPost(this.props.match.params.postId);
   };
 
   render() {
     const displayComments = this.props.comments.map((comment) => {
-        return <Comment key={comment._id} commentInfo={comment} />
+      return <Comment key={comment._id} commentInfo={comment} />
     })
-
-    return (
+    return(
       <PostPageWrapper>
-        <Post postInfo={this.props.onePost}/>
         <BackButton goBack={this.props.history.goBack}/>
-
+          <Post type="postPage" postInfo={this.props.onePost} postId={this.props.match.params.postId}/>
         <CommentsWrapper>
           {displayComments}
         </CommentsWrapper>
       </PostPageWrapper>
     );
   };
+
 };
 
 export default withPosts(PostPage);

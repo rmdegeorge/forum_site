@@ -27,7 +27,7 @@ class Home extends React.Component {
   render() {
     const sortedPosts = this.props.allPosts.sort((a, b) => (a.votes > b.votes) ? -1 : 1); // sort all posts by number of votes
     const displayPopularPosts = sortedPosts.slice(0,9).map((post) =>
-      <Post key={post._id} postInfo={post} />
+      <Post key={post._id} type="popular" postInfo={post} />
     );
     return (
       <HomeWrapper>
