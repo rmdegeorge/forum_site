@@ -18,7 +18,9 @@ class PostForm extends Component{
             username: "",
             body: "",
             tags: [],
-            _id: ""
+            _id: "",
+            redirect: false,
+            postid:''
         }
     }
 
@@ -43,14 +45,19 @@ class PostForm extends Component{
                 tags: this.state.tags,
                 topic: this.state._id,
                 body: this.state.body,
-                username: this.state.username
+                username: this.state.username                
             }
             axios.post('http://192.168.1.37:8080/posts/' + this.state._id, post).then(response => {
-                return <Redirect to={`/post/` + response.data._id}/>
+                this.setState({postid: response.data._id})
+                this.setState({redirect: true})
             })
         }
 
-        return (
+        if(this.state.redirect){
+            return <Redirect to={`/Posts/` + this.state.postid}/>
+        }
+
+        return (    
             <div>
 
                 <FormWrapper>
