@@ -26,17 +26,7 @@ class PostDataProvider extends React.Component {
         console.error(err);
       });
   };
-  getOnePost = (postId) => {
-    axios.get(`${API_HOST}posts/OnePost/${postId}`)
-      .then((res) => {
-        this.setState({
-          onePost: res.data
-        })
-      })
-      .catch((err) => {
-        console.error(err)
-      });
-  };
+
   getCommentsForPost = (postId) => {
     axios.get(`${API_HOST}comments/${postId}`)
       .then((res) => {
