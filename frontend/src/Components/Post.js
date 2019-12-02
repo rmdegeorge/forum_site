@@ -55,10 +55,20 @@ class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      votes: Number
+      votes: Number,
+      topic: String,
+
     };
   };
   componentDidMount() {
+    if (this.props.type === "popular" || this.props.type === "postPage") {  // get the topic name if
+      this.props.getTopicOfPost(this.props.postInfo.topic)
+        .then((res) => {
+          this.setState({
+            topic: res.data.name
+          })
+        })
+    }
     this.setState({
       votes: this.props.postInfo.votes
     });
@@ -85,7 +95,7 @@ class Post extends React.Component {
   };
 
   render() {
-    const {_id,title,body,username,tags,created} = this.props.postInfo
+    const {_id,title,body,username,tags,created,topic} = this.props.postInfo
     const date = new Date(created).toUTCString();
     const displayTags = tags.map((tag) => <Tag>{tag}</Tag>);
 
@@ -93,7 +103,7 @@ class Post extends React.Component {
       <PostWrapper>
         <PostTitle>
           {
-            this.props.type === 'postPage'
+            this.props.type === "postPage"
             ?
             title
             :
@@ -103,12 +113,23 @@ class Post extends React.Component {
           }
         </PostTitle>
         <UNameAndTime>
-          Posted by: {username} on {date}
+          Posted by: {username}
+          {
+            this.props.type === "popular" || this.props.type === "postPage"
+            ?
+            <span>
+              to
+              <NavLink to={`/Topics/${topic}`}>
+                {this.state.topic}
+              </NavLink>
+            </span>
+            :
+            null
+          }
+          on {date}
         </UNameAndTime>
         <PostBody>{body}</PostBody>
-        <PostTags>
-          {displayTags}
-        </PostTags>
+        <PostTags>{displayTags}</PostTags>
         <PostVotes>{this.state.votes}</PostVotes>
         <VoteBtn type="up" onClick={() => this.handleVote("up",this.state.votes,_id)}>Sweet!</VoteBtn>
         <VoteBtn type="down" onClick={() => this.handleVote("down",this.state.votes,_id)}>Not Cool</VoteBtn>
