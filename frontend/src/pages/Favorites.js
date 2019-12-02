@@ -7,7 +7,7 @@ const FavoritesWrapper = styled.div``;
 function Favorites(props) {
   return (
     <FavoritesWrapper>
-      <BackButton goBack={this.props.history.goBack()}/>
+      {/* <BackButton goBack={this.props.history.goBack}/> */}
     </FavoritesWrapper>
   )
 }

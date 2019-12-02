@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {withPosts} from '../providers/PostDataProvider';
+import { Link } from 'react-router-dom'
 import BackButton from '../Components/BackButton'
-
+import NewTopic from '../pages/NewTopic'
 
 import Card from '../Components/Card'
 
@@ -13,7 +14,6 @@ class TopicsContainer extends Component {
 
 
   render() {
-    console.log(this.props)
     const mappedTopics = this.props.topics.map(topic => (
       <Card key={topic._id}
             topicInfo={topic}/>
@@ -25,6 +25,7 @@ class TopicsContainer extends Component {
       <div>
         <BackButton goBack = {this.props.history.goBack}/>
         {mappedTopics}
+        <Link to='/NewTopic'>Create New Topic</Link>
       </div>
     );
   };

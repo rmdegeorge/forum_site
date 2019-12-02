@@ -5,7 +5,6 @@ const CommentWrapper = styled.div`
   width: 100%;
   border: 1px solid #000000;
   padding: 10px;
-  margin: 10px 0 0 0;
 `;
 const UNameAndTime = styled.div`
   display: flex;

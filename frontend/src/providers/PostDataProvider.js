@@ -26,17 +26,7 @@ class PostDataProvider extends React.Component {
         console.error(err);
       });
   };
-  getOnePost = (postId) => {
-    axios.get(`${API_HOST}posts/OnePost/${postId}`)
-      .then((res) => {
-        this.setState({
-          onePost: res.data
-        })
-      })
-      .catch((err) => {
-        console.error(err)
-      });
-  };
+
   getCommentsForPost = (postId) => {
     axios.get(`${API_HOST}comments/${postId}`)
       .then((res) => {
@@ -79,6 +69,10 @@ class PostDataProvider extends React.Component {
         console.error(err)
       });
   };
+  getTopicOfPost = (topicId) => {
+    return axios.get(`${API_HOST}topics/${topicId}`)
+
+  }
 
   render() {
     return (
@@ -90,6 +84,7 @@ class PostDataProvider extends React.Component {
         getTopics: this.getTopics,
         getOnePost: this.getOnePost,
         handleVotes: this.handleVotes,
+        getTopicOfPost: this.getTopicOfPost,
 
       }}>
         {this.props.children}
