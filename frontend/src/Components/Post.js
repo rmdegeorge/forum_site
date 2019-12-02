@@ -2,7 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import {withPosts} from '../providers/PostDataProvider';
 import {Link} from 'react-router-dom';
-
+/*
+*
+* Display on Popular posts display
+****
+*
+* Display on Topic Page
+****
+*
+* Display on PostPage
+**** no link for title on PostPage
+*
+* Display on Favorites Page
+*
+*/
 const PostWrapper = styled.div`
   width: 100%;
   border: 1px solid #000000;
@@ -79,9 +92,15 @@ class Post extends React.Component {
     return (
       <PostWrapper>
         <PostTitle>
-          <NavLink to={`/Posts/${_id}`}>
-            {title}
-          </NavLink>
+          {
+            this.props.type === 'postPage'
+            ?
+            title
+            :
+            <NavLink to={`/Posts/${_id}`}>
+              {title}
+            </NavLink>
+          }
         </PostTitle>
         <UNameAndTime>
           Posted by: {username} on {date}
