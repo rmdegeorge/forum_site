@@ -29,6 +29,10 @@ const UNameAndTime = styled.div`
   display: flex;
   align-items: flex-end;
   font-size: 10pt;
+  > span {
+    margin-left: 2pt;
+    margin-right: 2pt;
+  }
 `;
 const PostBody = styled.div`
   padding: 10px;
@@ -117,11 +121,9 @@ class Post extends React.Component {
           {
             this.props.type === "popular" || this.props.type === "postPage"
             ?
-            <span>
-              to
-              <NavLink to={`/Topics/${topic}`}>
-                {this.state.topic}
-              </NavLink>
+            <span>to <NavLink to={`/Topics/${topic}`}>
+                      {this.state.topic}
+                    </NavLink>
             </span>
             :
             null
