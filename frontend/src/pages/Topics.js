@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import {withPosts} from '../providers/PostDataProvider';
 import { Link } from 'react-router-dom'
 import BackButton from '../Components/BackButton'
-import NewTopic from '../pages/NewTopic'
+import styled from 'styled-components';
 
 import Card from '../Components/Card'
+import Button from '@material-ui/core/Button';
+
+const TopicsWrapper = styled.div`
+  width: 75%;
+  margin: 0 auto 0 auto;
+`;
 
 class TopicsContainer extends Component {
 
@@ -22,11 +28,13 @@ class TopicsContainer extends Component {
     console.log(this.props);
 
     return (
-      <div>
+      <TopicsWrapper>
         <BackButton goBack = {this.props.history.goBack}/>
+        <Link to='/NewTopic'>
+          <Button variant="contained">Create New Topic</Button>
+        </Link>
         {mappedTopics}
-        <Link to='/NewTopic'>Create New Topic</Link>
-      </div>
+      </TopicsWrapper>
     );
   };
 };
