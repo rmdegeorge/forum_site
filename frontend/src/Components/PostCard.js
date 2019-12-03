@@ -15,9 +15,10 @@ const NavLink = styled(Link)`
 const useStyles = makeStyles({
   card: {
     minWidth: 275,
+    margin: 10,
   },
   title: {
-    fontSize: 14,
+    fontSize: 28,
   },
   pos: {
     marginBottom: 12,
@@ -34,7 +35,7 @@ const useStyles = makeStyles({
 
     <Card className={classes.card}>
       <CardContent>
-        <Typography>
+        <Typography className={classes.title} component="h2">
           {
             props.type === "postPage"
             ?

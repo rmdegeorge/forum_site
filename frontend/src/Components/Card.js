@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     margin: 10,
   },
   title: {
-    fontSize: 14,
+    fontSize: 24,
   },
 });
 
@@ -25,7 +25,7 @@ function TopicCard(props){
     return (
       <Card className={classes.card}>
         <CardContent>
-          <Typography>
+          <Typography className={classes.title}>
             <NavLink to={`/Topics/${_id}`}>
               {name}
             </NavLink>
