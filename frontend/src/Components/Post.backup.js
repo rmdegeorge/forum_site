@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import {withPosts} from '../providers/PostDataProvider';
 import {Link, withRouter} from 'react-router-dom';
-import PostCard from './PostCard';
 
 // MaterialUI Components
 import Button from '@material-ui/core/Button';
@@ -13,6 +12,8 @@ const API_HOST = process.env.REACT_APP_API_HOST;
 
 const PostWrapper = styled.div`
   width: 100%;
+  border: 1px solid #000000;
+  padding: 10px;
   margin: 0 0 0 0;
 `;
 const PostTitle = styled.div`
@@ -120,13 +121,37 @@ class Post extends React.Component {
 
     return (
       <PostWrapper>
-        <PostCard
-          onePost={this.state.onePost}
-          votes={this.state.votes}
-          topic={this.state.topic}
-          type={this.props.type}
-          handleVote={this.handleVote}
-        />
+        <PostTitle>
+          {
+            this.props.type === "postPage"
+            ?
+            title
+            :
+            <NavLink to={`/Posts/${_id}`}>
+              {title}
+            </NavLink>
+          }
+        </PostTitle>
+        <UNameAndTime>
+          Posted by: {username}
+          {
+            this.props.type === "popular" || this.props.type === "postPage"
+            ?
+            <span>to <NavLink to={`/Topics/${topic}`}>
+                      {this.state.topic}
+                    </NavLink>
+            </span>
+            :
+            null
+          }
+          <span>on {date}</span>
+        </UNameAndTime>
+        <PostBody>{body}</PostBody>
+        <PostTags>{displayTags}</PostTags>
+        <PostVotes>{this.state.votes}</PostVotes>
+        <Button variant="contained" type="up" onClick={() => this.handleVote("up",this.state.votes,_id)}>Sweet!</Button>
+        <Button variant="contained" type="down" onClick={() => this.handleVote("down",this.state.votes,_id)}>Not Cool</Button>
+        <CommentButton variant="contained">Comment</CommentButton>
       </PostWrapper>
     );
   };
