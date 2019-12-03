@@ -15,13 +15,17 @@ const NavLink = styled(Link)`
 const useStyles = makeStyles({
   card: {
     minWidth: 275,
+    margin: 10,
   },
   title: {
-    fontSize: 14,
+    fontSize: 28,
   },
-  pos: {
-    marginBottom: 12,
+  subtitle: {
+    fontSize: 12,
   },
+  body: {
+    padding: 20,
+  }
 });
 
  function PostCard(props) {
@@ -34,7 +38,7 @@ const useStyles = makeStyles({
 
     <Card className={classes.card}>
       <CardContent>
-        <Typography>
+        <Typography className={classes.title} component="h2">
           {
             props.type === "postPage"
             ?
@@ -45,7 +49,7 @@ const useStyles = makeStyles({
             </NavLink>
           }
         </Typography>
-        <Typography>
+        <Typography className={classes.subtitle} component="h6">
           Posted by: {username}
           {
             props.type === "popular" || props.type === "postPage"
@@ -59,7 +63,7 @@ const useStyles = makeStyles({
           }
           <span>on {date}</span>
         </Typography>
-        <Typography component="p">
+        <Typography className={classes.body} component="p">
           {body}
         </Typography>
         {displayTags}
@@ -68,8 +72,8 @@ const useStyles = makeStyles({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button variant="contained" type="up" onClick={() => this.props.handleVote("up",props.votes,_id)}>Sweet!</Button>
-        <Button variant="contained" type="down" onClick={() => this.props.handleVote("down",props.votes,_id)}>Not Cool</Button>
+        <Button variant="contained" type="up" onClick={() => props.handleVote("up",props.votes,_id)}>Sweet!</Button>
+        <Button variant="contained" type="down" onClick={() => props.handleVote("down",props.votes,_id)}>Not Cool</Button>
         <CommentButton variant="contained">Comment</CommentButton>
       </CardActions>
     </Card>

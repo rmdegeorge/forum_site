@@ -5,7 +5,10 @@ import {withPosts} from '../providers/PostDataProvider'
 import Post from '../Components/Post';
 import BackButton from '../Components/BackButton'
 
-const TopicWrapper = styled.div``;
+const TopicWrapper = styled.div`
+  width: 75%;
+  margin: 0 auto 0 auto;
+`;
 const TopicTitle = styled.h1``;
 
 class Topic extends Component {
