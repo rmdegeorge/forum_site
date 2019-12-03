@@ -31,7 +31,7 @@ class PostDataProvider extends React.Component {
     axios.get(`${API_HOST}comments/${postId}`)
       .then((res) => {
         this.setState({
-          comments: res.data
+          comments: res.data.reverse()
         });
       })
       .catch((err) => {
@@ -71,7 +71,6 @@ class PostDataProvider extends React.Component {
   };
   getTopicOfPost = (topicId) => {
     return axios.get(`${API_HOST}topics/${topicId}`)
-
   }
 
   render() {
