@@ -17,14 +17,10 @@ const CommentsWrapper = styled.div`
   width: 95%;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  margin: 0 0 0 auto;
+  align-items: flex-start;
   position: relative;
   right: 0;
 
-  > :nth-child(2n) {
-    background-color: grey;
-  }
 `;
 
 class PostPage extends React.Component {

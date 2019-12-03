@@ -1,34 +1,40 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const CommentWrapper = styled.div`
-  width: 100%;
-  border: 1px solid #000000;
-  padding: 10px;
-`;
-const UNameAndTime = styled.div`
-  display: flex;
-  align-items: flex-end;
-  font-size: 10pt;
-`;
-const CommentBody = styled.div`
-  padding: 10px;
-`;
-const ReplyButton = styled.button``;
+import { makeStyles } from '@material-ui/core/styles';
+import {Card,CardContent,Typography} from '@material-ui/core';
+
+const useStyles = makeStyles({
+  card: {
+    minWidth: 275,
+    padding: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+  },
+  title: {
+    fontSize: 14,
+  },
+  body: {
+    fontSize: 12,
+    padding: 10,
+  }
+});
 
 
 function Comment(props) {
+  const classes = useStyles();
   const {username,body,created} = props.commentInfo;
   const date = new Date(created).toUTCString();
 
   return (
-    <CommentWrapper>
-      <UNameAndTime>
+    <Card className={classes.card}>
+      <Typography component="h4">
         Posted by: {username} on {date}
-      </UNameAndTime>
-      <CommentBody>{body}</CommentBody>
-      <ReplyButton>Reply</ReplyButton>
-    </CommentWrapper>
+      </Typography>
+      <Typography className={classes.body}component="p">
+        {body}
+      </Typography>
+    </Card>
   )
 }
 

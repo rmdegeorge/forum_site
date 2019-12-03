@@ -20,9 +20,12 @@ const useStyles = makeStyles({
   title: {
     fontSize: 28,
   },
-  pos: {
-    marginBottom: 12,
+  subtitle: {
+    fontSize: 12,
   },
+  body: {
+    padding: 20,
+  }
 });
 
  function PostCard(props) {
@@ -46,7 +49,7 @@ const useStyles = makeStyles({
             </NavLink>
           }
         </Typography>
-        <Typography>
+        <Typography className={classes.subtitle} component="h6">
           Posted by: {username}
           {
             props.type === "popular" || props.type === "postPage"
@@ -60,7 +63,7 @@ const useStyles = makeStyles({
           }
           <span>on {date}</span>
         </Typography>
-        <Typography component="p">
+        <Typography className={classes.body} component="p">
           {body}
         </Typography>
         {displayTags}
