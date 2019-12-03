@@ -1,12 +1,23 @@
 import React, {Component} from 'react'
 import { Redirect } from 'react-router-dom'
 import {withPosts} from '../providers/PostDataProvider'
+
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+
 import axios from 'axios'
 import styled from 'styled-components'
 
-const FormWrapper = styled.div`
-        text-align: center
+const FormWrapper = styled.form`
+    display: grid;
+    row-gap: 10px;
+    justify-content: center;
     
+`
+
+const SelectBox = styled(TextField)`
+    width: 225px;
 `
 
 class PostForm extends Component{
@@ -27,11 +38,11 @@ class PostForm extends Component{
     componentDidMount(){
         this.props.getTopics();
     }
-
+    
     render(){
         
         const mappedTopics = this.props.topics.map(topic => (
-            <option name="_id" value={topic._id}>{topic.name}</option>
+            <MenuItem value={topic._id}>{topic.name}</MenuItem>
         ))
 
         const handleChange = e => {
@@ -40,13 +51,19 @@ class PostForm extends Component{
         
         const handleSubmit = e => {
             e.preventDefault();
+            // this.setState(prevState => {tags: prevState.tags.split(", ")})
+
             const post = {
                 title: this.state.title,
-                tags: this.state.tags,
+                tags: this.state.tags.split(", "),
                 topic: this.state._id,
                 body: this.state.body,
-                username: this.state.username                
+                username: this.state.username,
+                votes: 0           
             }
+
+            console.log(this.state.tags)
+
             axios.post('http://192.168.1.37:8080/posts/' + this.state._id, post).then(response => {
                 this.setState({postid: response.data._id})
                 this.setState({redirect: true})
@@ -57,24 +74,25 @@ class PostForm extends Component{
             return <Redirect to={`/Posts/` + this.state.postid}/>
         }
 
+
         return (    
             <div>
 
-                <FormWrapper>
-                    <form onSubmit={handleSubmit}>
+                
+                    <FormWrapper>
 
                         {/* Title, username, body, tags */}
-                        <input onChange={handleChange} type="text" name="title" id="" placeholder="Title"/>
-                        <input onChange={handleChange} type="text" name="username" placeholder="Username"/>
-                        <select onChange={handleChange} name="_id">
+                        <TextField onChange={handleChange} type="text" name="title" id="outlined-basic" variant="outlined" placeholder="Title"/>
+                        <TextField onChange={handleChange} type="text" name="username" id="outlined-basic" variant="outlined" placeholder="Username"/>
+                        <SelectBox defaultValue=""  id="outlined-select-currency" select name="_id" label="Select A Topic" onChange={handleChange} margin="normal" variant="outlined">
                             {mappedTopics}
-                        </select>
-                        <textarea onChange={handleChange} name="body" id="" cols="30" rows="10" placeholder="Content"></textarea>
-                        <input onChange={handleChange} type="text" name="tags" id="" placeholder="tags"/>
-                        <button>Post</button>
+                        </SelectBox>
+                        <TextField onChange={handleChange} name="body" id="outlined-textarea" placeholder="Content" multiline margin="normal" variant="outlined" />
+                        <TextField onChange={handleChange} type="text" name="tags" id="outlined-basic" variant="outlined" placeholder="tags"/>
+                        <Button component="button" onClick={handleSubmit} variant="contained">Post</Button>
 
-                    </form>
-                </FormWrapper>
+                    </FormWrapper>
+
                 
             </div>
         )   
