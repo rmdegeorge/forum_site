@@ -69,8 +69,8 @@ const useStyles = makeStyles({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button variant="contained" type="up" onClick={() => this.props.handleVote("up",props.votes,_id)}>Sweet!</Button>
-        <Button variant="contained" type="down" onClick={() => this.props.handleVote("down",props.votes,_id)}>Not Cool</Button>
+        <Button variant="contained" type="up" onClick={() => props.handleVote("up",props.votes,_id)}>Sweet!</Button>
+        <Button variant="contained" type="down" onClick={() => props.handleVote("down",props.votes,_id)}>Not Cool</Button>
         <CommentButton variant="contained">Comment</CommentButton>
       </CardActions>
     </Card>
