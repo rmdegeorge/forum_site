@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {withPosts} from '../providers/PostDataProvider';
 import { Link } from 'react-router-dom'
+import { MDBCol} from "mdbreact";
 import BackButton from '../Components/BackButton'
 import styled from 'styled-components';
 
@@ -13,19 +14,36 @@ const TopicsWrapper = styled.div`
 `;
 
 class TopicsContainer extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      search: ''
+    }
+  }
 
   componentDidMount(){
     this.props.getTopics();
   };
 
+  updateSearch = event => {
+    this.setState({search: event.target.value.substr(0,20)})
+  }
+
 
   render() {
-    const mappedTopics = this.props.topics.map(topic => (
+    let filteredTopics = this.props.topics.filter(
+      (topics) => {
+        return topics.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+      }
+    )
+
+    const mappedTopics = filteredTopics.map(topic => (
       <Card key={topic._id}
             topicInfo={topic}/>
     ));
 
-    console.log(this.props);
+    console.log(this.props.topics);
 
     return (
       <TopicsWrapper>
@@ -33,6 +51,13 @@ class TopicsContainer extends Component {
         <Link to='/NewTopic'>
           <Button variant="contained">Create New Topic</Button>
         </Link>
+        <MDBCol md="6">
+          <div className="input-group md-form form-sm form-1 pl-0">
+          <div className="input-group-prepend">
+          </div>
+            <input className="form-control my-0 py-1" type="text" value={this.state.search} placeholder="Search" aria-label="Search" onChange={this.updateSearch} />
+          </div>
+        </MDBCol>
         {mappedTopics}
       </TopicsWrapper>
     );

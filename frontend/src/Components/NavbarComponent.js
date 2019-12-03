@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // import styled from 'styled-components';
 import {Navbar, NavbarBrand, Nav, NavItem, NavLink, NavbarToggler, Collapse} from 'reactstrap';
 
+
 // const NavbarWrapper = styled.div``;
 
 const NavbarComponent = (props) => {
@@ -20,13 +21,10 @@ const NavbarComponent = (props) => {
               <NavLink href="/Topics">Topics</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/Favorites">Favorites</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/Topic">Topic</NavLink>
-            </NavItem>
-            <NavItem>
               <NavLink href="/NewPost">New Post</NavLink>
+            </NavItem>
+            <NavItem>
+              
             </NavItem>
           </Nav>
         </Collapse>

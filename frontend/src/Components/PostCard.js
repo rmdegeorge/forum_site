@@ -1,18 +1,25 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {Card,CardActions,CardContent,Button,Typography,Chip} from '@material-ui/core';
+import React, {useState, useEffect} from 'react';
 
+//@material-ui
+import { makeStyles } from '@material-ui/core/styles';
+import {Card,CardActions,CardContent,Button,Typography,Chip,
+        ExpansionPanel,ExpansionPanelSummary,ExpansionPanelDetails,
+        TextField,Icon} from '@material-ui/core';
+// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+//Components
 import styled from 'styled-components';
 import {withPosts} from '../providers/PostDataProvider';
 import {Link, withRouter} from 'react-router-dom';
+import axios from 'axios';
+const API_HOST = process.env.REACT_APP_API_HOST;
 const CommentButton = styled(Button)`
-
 `;
 const NavLink = styled(Link)`
   color: inherit;
 `;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   card: {
     minWidth: 275,
     margin: 10,
@@ -23,16 +30,40 @@ const useStyles = makeStyles({
   subtitle: {
     fontSize: 12,
   },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
   body: {
     padding: 20,
   }
-});
+}));
 
- function PostCard(props) {
+function PostCard(props) {
   const classes = useStyles();
   const {_id,title,body,username,tags,created,topic} = props.onePost;
   const date = new Date(created).toUTCString();
   const displayTags = tags.map((tag,i) => <Chip size="small" key={tag + i} label={tag} />);
+
+  const [comment, setComment] = useState('')
+  const [user, setUser] = useState('')
+  const handleComment = (e) => {
+    e.preventDefault()
+    console.log('sent')
+    const newComment = {
+      username: user,
+      body: comment
+    }
+    axios.post(`${API_HOST}comments/${_id}`, newComment)
+      .then(res => {
+        setComment(res.data)
+        props.getCommentsForPost(_id)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  } 
 
   return (
 
@@ -74,8 +105,48 @@ const useStyles = makeStyles({
       <CardActions>
         <Button variant="contained" type="up" onClick={() => props.handleVote("up",props.votes,_id)}>Sweet!</Button>
         <Button variant="contained" type="down" onClick={() => props.handleVote("down",props.votes,_id)}>Not Cool</Button>
-        <CommentButton variant="contained">Comment</CommentButton>
       </CardActions>
+        <div className={classes.root}>
+          <ExpansionPanel>
+            <ExpansionPanelSummary
+              expandIcon={
+                <CommentButton
+                  variant="contained">Comment
+                </CommentButton>
+                }>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <TextField
+                id="standard-textarea"
+                label="Username"
+                placeholder="Username"
+                multiline
+                className={classes.textField}
+                margin="normal"
+                onChange={e => setUser(e.target.value)}
+              />
+              <TextField
+                id="standard-textarea"
+                label="Comment"
+                placeholder="Comment"
+                multiline
+                className={classes.textField}
+                margin="normal"
+                onChange={e => setComment(e.target.value)}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                type='submit'
+                value='submit'
+                onClick={handleComment}
+              >
+                Send
+              </Button>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+        </div>
+        
     </Card>
 
   );
