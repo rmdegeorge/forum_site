@@ -1,13 +1,13 @@
 import React from 'react';
-import { Button } from 'reactstrap';
+import {Button} from '@material-ui/core';
 import {withPosts} from '../providers/PostDataProvider';
 
 
 function BackButton(props) {
   return (
-    <div>
-      <Button color="secondary" onClick={props.goBack}>Back</Button>
-    </div>
+      <Button onClick={props.goBack}>
+        Back
+      </Button>
   );
 };
 export default withPosts(BackButton)
