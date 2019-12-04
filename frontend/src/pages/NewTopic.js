@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
+import styled from 'styled-components'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
 import axios from 'axios'
+
+const FormWrapper = styled.form`
+    margin-top: 10px;
+    text-align: center;
+`
 
 class NewTopic extends Component {
     constructor(){
@@ -36,11 +44,11 @@ class NewTopic extends Component {
 
         return (
             <div>
-                <form onSubmit={handleSubmit}>
-
-                    <input onChange={handleChange} type="text" name="name" id="" placeholder="Topic Name"/>
-                    <button>Submit</button>
-                </form>
+                <FormWrapper>
+                    
+                    <TextField onChange={handleChange} type="text" id="outlined-basic" name="name" label="New Topic Name" variant="outlined" placeholder="Topic Name"/>
+                    <Button component="button" onClick={handleSubmit} variant="contained">Post</Button>
+                </FormWrapper>
             </div>
         );
     }
