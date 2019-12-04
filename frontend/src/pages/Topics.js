@@ -13,13 +13,13 @@ const TopicsWrapper = styled.div`
   width: 75%;
   margin: 0 auto 0 auto;
 `;
-const BackSearchFormWrapper = styled.div`
+const BackWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
 `;
-const NewTopicWrapper = styled.div`
+const NewTopicSearchWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   margin: 10px;
@@ -63,7 +63,7 @@ class TopicsContainer extends Component {
 
     return (
       <TopicsWrapper>
-        <BackSearchFormWrapper><BackButton goBack = {this.props.history.goBack}/>
+        <BackWrapper><BackButton goBack = {this.props.history.goBack}/>
           <MDBCol md="6">
             <div className="input-group md-form form-sm form-1 pl-0">
             <div className="input-group-prepend">
@@ -72,10 +72,10 @@ class TopicsContainer extends Component {
             </div>
           </MDBCol>
 
-        </BackSearchFormWrapper>
-        <NewTopicWrapper>
+        </BackWrapper>
+        <NewTopicSearchWrapper>
           <NewTopic />
-        </NewTopicWrapper>
+        </NewTopicSearchWrapper>
         {mappedTopics}
       </TopicsWrapper>
     );
