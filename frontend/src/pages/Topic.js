@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom'
 import styled from 'styled-components';
 import { MDBCol} from "mdbreact";
 import {withPosts} from '../providers/PostDataProvider'
+
+import Button from '@material-ui/core/Button';
 
 import Post from '../Components/Post';
 import BackButton from '../Components/BackButton'
@@ -54,6 +57,9 @@ class Topic extends Component {
     return (
       <TopicWrapper>
         <BackButton goBack={this.props.history.goBack} />
+        <Link to='/NewPost'>
+          <Button variant="contained">Create New Post</Button>
+        </Link>
         <TopicTitle>
           {this.state.topic}
         </TopicTitle>
