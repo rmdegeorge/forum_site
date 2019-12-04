@@ -18,6 +18,9 @@ const CommentButton = styled(Button)`
 const NavLink = styled(Link)`
   color: inherit;
 `;
+const AddSpaceLeft = styled.span`
+  margin-left: 2pt;
+`;
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -63,7 +66,7 @@ function PostCard(props) {
       .catch(err => {
         console.error(err)
       })
-  } 
+  }
 
   return (
 
@@ -85,14 +88,14 @@ function PostCard(props) {
           {
             props.type === "popular" || props.type === "postPage"
             ?
-            <span>to <NavLink to={`/Topics/${topic}`}>
+            <AddSpaceLeft>to <NavLink to={`/Topics/${topic}`}>
                       {props.topic}
                     </NavLink>
-            </span>
+            </AddSpaceLeft>
             :
             null
           }
-          <span>on {date}</span>
+          <AddSpaceLeft>on {date}</AddSpaceLeft>
         </Typography>
         <Typography className={classes.body} component="p">
           {body}
@@ -146,7 +149,7 @@ function PostCard(props) {
             </ExpansionPanelDetails>
           </ExpansionPanel>
         </div>
-        
+
     </Card>
 
   );
