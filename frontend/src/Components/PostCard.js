@@ -102,7 +102,8 @@ function PostCard(props) {
         </Typography>
         {displayTags}
         <Typography component="p">
-          {props.votes}
+          <br/>
+          Votes: {props.votes}
         </Typography>
       </CardContent>
       <CardActions>
