@@ -88,7 +88,7 @@ class PostForm extends Component{
                             {mappedTopics}
                         </SelectBox>
                         <TextField onChange={handleChange} name="body" id="outlined-textarea" placeholder="Content" multiline margin="normal" variant="outlined" />
-                        <TextField onChange={handleChange} type="text" name="tags" id="outlined-basic" variant="outlined" placeholder="tags"/>
+                        <TextField onChange={handleChange} type="text" name="tags" id="outlined-basic" variant="outlined" placeholder="Tags(seperate by a ,)"/>
                         <Button component="button" onClick={handleSubmit} variant="contained">Post</Button>
 
                     </FormWrapper>

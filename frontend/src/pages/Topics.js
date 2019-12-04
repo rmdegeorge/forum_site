@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { MDBCol} from "mdbreact";
 import BackButton from '../Components/BackButton'
 import styled from 'styled-components';
+import NewTopic from './NewTopic'
 
 import Card from '../Components/Card'
 import Button from '@material-ui/core/Button';
@@ -48,9 +49,6 @@ class TopicsContainer extends Component {
     return (
       <TopicsWrapper>
         <BackButton goBack = {this.props.history.goBack}/>
-        <Link to='/NewTopic'>
-          <Button variant="contained">Create New Topic</Button>
-        </Link>
         <MDBCol md="6">
           <div className="input-group md-form form-sm form-1 pl-0">
           <div className="input-group-prepend">
@@ -58,6 +56,7 @@ class TopicsContainer extends Component {
             <input className="form-control my-0 py-1" type="text" value={this.state.search} placeholder="Search" aria-label="Search" onChange={this.updateSearch} />
           </div>
         </MDBCol>
+        <NewTopic />
         {mappedTopics}
       </TopicsWrapper>
     );
