@@ -9,7 +9,7 @@ const NavbarComponent = (props) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
-  
+
   return (
     <div>
       <Navbar color="dark" dark>
@@ -18,13 +18,13 @@ const NavbarComponent = (props) => {
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
             <NavItem>
-              <NavLink href="/Topics">Topics</NavLink>
+              <NavLink href="/TopicsPage">Topics</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/NewPost">New Post</NavLink>
             </NavItem>
             <NavItem>
-              
+
             </NavItem>
           </Nav>
         </Collapse>

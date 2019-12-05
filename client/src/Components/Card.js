@@ -26,7 +26,7 @@ function TopicCard(props){
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.title}>
-            <NavLink to={`/Topics/${_id}`}>
+            <NavLink to={`/TopicsPage/${_id}`}>
               {name}
             </NavLink>
           </Typography>
