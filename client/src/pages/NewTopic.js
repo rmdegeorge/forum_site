@@ -47,7 +47,7 @@ class NewTopic extends Component {
         }
 
         if(this.state.redirect){
-            return <Redirect to='/Topics' />
+            return <Redirect to='/TopicsPage' />
         }
 
         return (
