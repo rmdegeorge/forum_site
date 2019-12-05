@@ -13,7 +13,7 @@ const FormWrapper = styled.form`
     display: grid;
     row-gap: 10px;
     justify-content: center;
-    
+
 `
 
 const SelectBox = styled(TextField)`
@@ -38,9 +38,9 @@ class PostForm extends Component{
     componentDidMount(){
         this.props.getTopics();
     }
-    
+
     render(){
-        
+
         const mappedTopics = this.props.topics.map(topic => (
             <MenuItem value={topic._id}>{topic.name}</MenuItem>
         ))
@@ -48,7 +48,7 @@ class PostForm extends Component{
         const handleChange = e => {
             this.setState({[e.target.name]: e.target.value})
         }
-        
+
         const handleSubmit = e => {
             e.preventDefault();
             // this.setState(prevState => {tags: prevState.tags.split(", ")})
@@ -59,12 +59,12 @@ class PostForm extends Component{
                 topic: this.state._id,
                 body: this.state.body,
                 username: this.state.username,
-                votes: 0           
+                votes: 0
             }
 
             console.log(this.state.tags)
 
-            axios.post('http://192.168.1.37:8080/posts/' + this.state._id, post).then(response => {
+            axios.post('http://localhost:8000/posts/' + this.state._id, post).then(response => {
                 this.setState({postid: response.data._id})
                 this.setState({redirect: true})
             })
@@ -75,10 +75,10 @@ class PostForm extends Component{
         }
 
 
-        return (    
+        return (
             <div>
 
-                
+
                     <FormWrapper>
 
                         {/* Title, username, body, tags */}
@@ -93,9 +93,9 @@ class PostForm extends Component{
 
                     </FormWrapper>
 
-                
+
             </div>
-        )   
+        )
     }
 }
 
