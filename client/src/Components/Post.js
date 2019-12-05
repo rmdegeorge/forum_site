@@ -15,8 +15,8 @@ class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      votes: Number,
-      topic: String,
+      votes: 0,
+      topic: "",
       onePost: {
         tags: [],   //This is here to prime state for the tags array. if its not there, the .join method will break on render before the data comes back from axios
       },
