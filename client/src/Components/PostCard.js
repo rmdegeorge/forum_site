@@ -78,7 +78,7 @@ function PostCard(props) {
             ?
             title
             :
-            <NavLink to={`/Posts/${_id}`}>
+            <NavLink to={`/PostsPage/${_id}`}>
               {title}
             </NavLink>
           }
@@ -88,7 +88,7 @@ function PostCard(props) {
           {
             props.type === "popular" || props.type === "postPage"
             ?
-            <AddSpaceLeft>to <NavLink to={`/Topics/${topic}`}>
+            <AddSpaceLeft>to <NavLink to={`/TopicsPage/${topic}`}>
                       {props.topic}
                     </NavLink>
             </AddSpaceLeft>

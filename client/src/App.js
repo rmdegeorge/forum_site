@@ -17,10 +17,10 @@ function App(props) {
       <NavbarComponent />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/Topics" component={Topics} />
-        <Route exact path="/Topics/:topicId" component={Topic} />
+        <Route exact path="/TopicsPage" component={Topics} />
+        <Route exact path="/TopicsPage/:topicId" component={Topic} />
         <Route path="/NewPost" component={NewPost} />
-        <Route  path="/Posts/:postId" component={PostPage} />
+        <Route  path="/PostsPage/:postId" component={PostPage} />
         <Route path='/NewTopic' component={NewTopic}/>
 
         {/* Keep this at bottom of Switch, Provides 404 */}
