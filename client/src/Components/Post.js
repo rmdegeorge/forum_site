@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import {withPosts} from '../providers/PostDataProvider';
-import {Link, withRouter} from 'react-router-dom';
 import PostCard from './PostCard';
 
 import axios from 'axios';
@@ -98,7 +97,7 @@ class Post extends React.Component {
   };
 };
 
-export default withRouter(withPosts(Post));
+export default withPosts(Post);
 
 
 
