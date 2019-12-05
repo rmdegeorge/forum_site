@@ -5,16 +5,17 @@ const path = require("path")
 require("dotenv").config();
 const port = process.env.PORT || 8000;
 
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*'); // * => allow all origins
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, X-Auth-Token, Accept'); // add remove headers according to your needs
-  next()
-})
+
 app.use(express.json())
 app.use('/topics', require('./routes/topicRouter'))
 app.use('/Posts', require('./routes/postRouter'))
 app.use('/comments', require('./routes/commentRouter'))
+// app.use(function (req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*'); // * => allow all origins
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,OPTIONS,DELETE');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type, X-Auth-Token, Accept'); // add remove headers according to your needs
+//   next()
+// })
 app.use(express.static(path.join(__dirname, "client", "build")))
 
 mongoose.connect(

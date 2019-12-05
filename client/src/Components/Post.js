@@ -4,7 +4,7 @@ import {withPosts} from '../providers/PostDataProvider';
 import PostCard from './PostCard';
 
 import axios from 'axios';
-const API_HOST = "http://localhost:8000/";
+// const API_HOST = "http://localhost:8000/";
 
 const PostWrapper = styled.div`
   width: 100%;
@@ -25,7 +25,7 @@ class Post extends React.Component {
   };
   componentDidMount() {
     if (this.props.type === "postPage") {
-      axios.get(`${API_HOST}posts/OnePost/${this.props.postId}`)
+      axios.get(`/posts/OnePost/${this.props.postId}`)
         .then((res) => {
           try {
             this.setState({

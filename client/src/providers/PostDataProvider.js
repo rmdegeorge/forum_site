@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-const API_HOST =  "http://localhost:8000/";
+// const API_HOST =  "http://localhost:8000/";
 
 const {Provider, Consumer} = React.createContext();
 
@@ -19,7 +19,7 @@ class PostDataProvider extends React.Component {
   };
   handleVotes = (postId,newVoteCount) => {
 
-    axios.put(`${API_HOST}posts/${postId}`, newVoteCount)
+    axios.put(`/posts/${postId}`, newVoteCount)
       .then((res) => {
       })
       .catch((err) => {
@@ -28,7 +28,7 @@ class PostDataProvider extends React.Component {
   };
 
   getCommentsForPost = (postId) => {
-    axios.get(`${API_HOST}comments/${postId}`)
+    axios.get(`/comments/${postId}`)
       .then((res) => {
         this.setState({
           comments: res.data.reverse()
@@ -39,7 +39,7 @@ class PostDataProvider extends React.Component {
       });
   };
   getRandomPosts = () => {
-    axios.get(`${API_HOST}posts/`)
+    axios.get(`/posts/`)
       .then((res) => {
         this.setState({
           allPosts: res.data
@@ -50,7 +50,7 @@ class PostDataProvider extends React.Component {
       });
   };
   getPostsForTopic = (id) => {        // we'll need to adjust this so it only pulls post for a single topic
-    axios.get(`${API_HOST}posts/${id}`)
+    axios.get(`/posts/${id}`)
       .then(res => {
         this.setState({
           posts: res.data
@@ -61,7 +61,7 @@ class PostDataProvider extends React.Component {
       });
   };
   getTopics = () => {
-    axios.get(`${API_HOST}topics`)
+    axios.get(`/topics`)
       .then( res => {
         this.setState({topics: res.data})
       })
@@ -70,7 +70,7 @@ class PostDataProvider extends React.Component {
       });
   };
   getTopicOfPost = (topicId) => {
-    return axios.get(`${API_HOST}topics/${topicId}`)
+    return axios.get(`/topics/${topicId}`)
   }
 
   render() {
