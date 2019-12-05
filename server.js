@@ -12,7 +12,7 @@ app.use('/comments', require('./routes/commentRouter'))
 app.use(express.static(path.join(__dirname, "client", "build")))
 
 mongoose.connect(
-    'mongodb://localhost:27017/forum',
+    process.env.MONGODB_URI || 'mongodb://localhost:27017/forum',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
