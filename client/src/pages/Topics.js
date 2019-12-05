@@ -56,7 +56,7 @@ class TopicsContainer extends Component {
             topicInfo={topic}/>
     ));
 
-    console.log(this.props.topics);
+    // console.log(this.props.topics);
 
     return (
       <TopicsWrapper>
