@@ -40,7 +40,7 @@ class NewTopic extends Component {
                 name: this.state.name
             }
 
-            axios.post('http://192.168.1.37:8080/Topics', post).then(() => {
+            axios.post('http://localhost:8000/Topics', post).then(() => {
                 this.setState({redirect: true})
                 this.props.getTopics();
             })
