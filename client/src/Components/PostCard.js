@@ -12,7 +12,7 @@ import styled from 'styled-components';
 import {withPosts} from '../providers/PostDataProvider';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-const API_HOST = process.env.REACT_APP_API_HOST || "http://localhost:8000/";
+const API_HOST = "http://localhost:8000/";
 const CommentButton = styled(Button)`
 `;
 const NavLink = styled(Link)`
