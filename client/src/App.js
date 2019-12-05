@@ -5,7 +5,6 @@ import GlobalStyle from './theme/GlobalStyle';
 import Home from './pages/Home';
 import Topics from './pages/Topics';
 import Topic from './pages/Topic';
-import Favorites from './pages/Favorites';
 import NavbarComponent from './Components/NavbarComponent';
 import NewPost from './pages/NewPost';
 import NewTopic from './pages/NewTopic'
@@ -19,7 +18,6 @@ function App(props) {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/Topics" component={Topics} />
-        <Route path="/Favorites" component={Favorites} />
         <Route exact path="/Topics/:topicId" component={Topic} />
         <Route path="/NewPost" component={NewPost} />
         <Route  path="/Posts/:postId" component={PostPage} />

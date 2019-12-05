@@ -1,18 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 //@material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import {Card,CardActions,CardContent,Button,Typography,Chip,
         ExpansionPanel,ExpansionPanelSummary,ExpansionPanelDetails,
-        TextField,Icon} from '@material-ui/core';
+        TextField} from '@material-ui/core';
 // import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 //Components
 import styled from 'styled-components';
 import {withPosts} from '../providers/PostDataProvider';
-import {Link, withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
-const API_HOST = process.env.REACT_APP_API_HOST || "http://localhost:8000/";
+const API_HOST = "http://localhost:8000/";
 const CommentButton = styled(Button)`
 `;
 const NavLink = styled(Link)`

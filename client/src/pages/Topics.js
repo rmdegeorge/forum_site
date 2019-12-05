@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import {withPosts} from '../providers/PostDataProvider';
-import { Link } from 'react-router-dom'
 import { MDBCol} from "mdbreact";
 import BackButton from '../Components/BackButton'
 import styled from 'styled-components';
 import NewTopic from './NewTopic'
-
 import Card from '../Components/Card'
-import Button from '@material-ui/core/Button';
 
 const TopicsWrapper = styled.div`
   width: 75%;
