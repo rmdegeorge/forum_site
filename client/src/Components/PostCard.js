@@ -12,7 +12,7 @@ import styled from 'styled-components';
 import {withPosts} from '../providers/PostDataProvider';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-const API_HOST = "http://localhost:8000/";
+// const API_HOST = "http://localhost:8000/";
 const CommentButton = styled(Button)`
 `;
 const NavLink = styled(Link)`
@@ -58,7 +58,7 @@ function PostCard(props) {
       username: user,
       body: comment
     }
-    axios.post(`${API_HOST}comments/${_id}`, newComment)
+    axios.post(`/comments/${_id}`, newComment)
       .then(res => {
         setComment(res.data)
         props.getCommentsForPost(_id)
