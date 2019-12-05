@@ -42,7 +42,7 @@ class Topic extends Component {
         });
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -61,7 +61,7 @@ class Topic extends Component {
       return <Post key={post._id} postInfo={post} />
     });
 
-    console.log(this.props.posts)
+    // console.log(this.props.posts)
 
     return (
       <TopicWrapper>

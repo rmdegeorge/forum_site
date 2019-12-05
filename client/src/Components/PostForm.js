@@ -64,14 +64,14 @@ class PostForm extends Component{
 
             console.log(this.state.tags)
 
-            axios.post('http://localhost:8000/posts/' + this.state._id, post).then(response => {
+            axios.post('/posts/' + this.state._id, post).then(response => {
                 this.setState({postid: response.data._id})
                 this.setState({redirect: true})
             })
         }
 
         if(this.state.redirect){
-            return <Redirect to={`/Posts/` + this.state.postid}/>
+            return <Redirect to={`/PostsPage/` + this.state.postid}/>
         }
 
 
