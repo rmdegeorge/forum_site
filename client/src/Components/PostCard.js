@@ -53,7 +53,7 @@ function PostCard(props) {
   const [user, setUser] = useState('')
   const handleComment = (e) => {
     e.preventDefault()
-    console.log('sent')
+    // console.log('sent')
     const newComment = {
       username: user,
       body: comment

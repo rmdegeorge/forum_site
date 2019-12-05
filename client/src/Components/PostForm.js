@@ -62,7 +62,7 @@ class PostForm extends Component{
                 votes: 0
             }
 
-            console.log(this.state.tags)
+            // console.log(this.state.tags)
 
             axios.post('/posts/' + this.state._id, post).then(response => {
                 this.setState({postid: response.data._id})
